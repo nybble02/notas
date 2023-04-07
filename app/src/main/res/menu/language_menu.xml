@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/lang_en" android:title="@string/lang_menu_en"></item>
+    <item android:id="@+id/lang_fr" android:title="@string/lang_menu_fr"></item>
+    <item android:id="@+id/lang_gr" android:title="@string/lang_menu_gr"></item>
+    <item android:id="@+id/lang_it" android:title="@string/lang_menu_it"></item>
+    <item android:id="@+id/lang_ru" android:title="@string/lang_menu_ru"></item>
+    <item android:id="@+id/lang_jp" android:title="@string/lang_menu_jp"></item>
+    <item android:id="@+id/lang_ch" android:title="@string/lang_menu_ch"></item>
+</menu>

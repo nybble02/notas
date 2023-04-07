@@ -9,6 +9,16 @@
 
 
     <string name="notes_btn_addNote">Add New Note</string>
+    <string name="notes_btn_editNote">Edit Note</string>
+
+    <string name="lang_menu_en">English</string>
+    <string name="lang_menu_fr">French</string>
+    <string name="lang_menu_gr">Germany</string>
+    <string name="lang_menu_it">Italian</string>
+    <string name="lang_menu_ru">Russian</string>
+    <string name="lang_menu_jp">Japanese</string>
+    <string name="lang_menu_ch">Chinese</string>
+
 
 
 </resources>

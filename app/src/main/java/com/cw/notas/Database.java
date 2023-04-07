@@ -2,6 +2,8 @@ package com.cw.notas;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,13 +13,13 @@ import android.database.sqlite.SQLiteStatement;
 public class Database {
 
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 2;
+    private static int DATABASE_VERSION = 5;
     static final String TABLE_NAME = "newtable";
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
 
-    private static final String INSERT_NOTE = "insert into notes (title, content, dateCreated) values (?,?,?)";
+    private static final String INSERT_NOTE = "insert into notes (id, title, content, dateCreated) values (?,?,?,?)";
 
     public Database(Context context) {
         Database.context = context;
@@ -28,21 +30,34 @@ public class Database {
 
     }
 
-    public long noteInsert(String title, String content, String dateCreated) {
-        this.insertNote.bindString(1, title);
-        this.insertNote.bindString(2, content);
-        this.insertNote.bindString(3, dateCreated);
+    public long noteInsert(String id, String title, String content, String dateCreated) {
+        this.insertNote.bindString(1, id);
+        this.insertNote.bindString(2, title);
+        this.insertNote.bindString(3, content);
+        this.insertNote.bindString(4, dateCreated);
         return this.insertNote.executeInsert();
     }
 
-    public void deleteAll(String TABLE_NAME) {
-        db.delete(TABLE_NAME, null, null);
+   public void noteUpdate(String noteId, String title, String content, String dateCreated) {
+        ContentValues noteValues = new ContentValues();
+        noteValues.put("title", title);
+        noteValues.put("content", content);
+        noteValues.put("dateCreated", dateCreated);
+
+        db.update("notes", noteValues, "id=?",new String[]{noteId});
+        db.close();
+
+   }
+
+    public void noteDelete(String noteId) {
+        db.delete("notes", "id=?", new String[]{noteId});
+        db.close();
     }
 
     public List<String[]> noteSelectAll() {
         List<String[]> noteList = new ArrayList<String[]>();
 
-        Cursor cursor = db.query("notes", new String[]{"id", "title", "content", "dateCreated"}, null, null, null, null, "dateCreated desc");
+        Cursor cursor = db.query("notes", new String[]{"id", "title", "content", "dateCreated"}, null, null, null, null, null);
 
         int count = 0;
 
@@ -66,13 +81,13 @@ public class Database {
         return noteList;
     }
 
-    private static class OpenHelper extends SQLiteOpenHelper {
+    public static class OpenHelper extends SQLiteOpenHelper {
         OpenHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE notes (id INTEGER PRIMARY KEY, title TEXT, content TEXT, dateCreated TEXT)");
+            db.execSQL("CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT, content TEXT, dateCreated TEXT)");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
