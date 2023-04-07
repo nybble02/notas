@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">NOTAS</string>
+    <string name="app_notes">Notes</string>
+    <string name="app_checklist">Check List</string>
+    <string name="app_todo">ToDo</string>
+    <string name="app_madeBy">Made By: Nicole Jordaan</string>
+    <string name="app_save">Save</string>
+    <string name="app_delete">Delete</string>
+
+
+    <string name="notes_btn_addNote">Add New Note</string>
+
+
+</resources>
