@@ -1,4 +1,4 @@
-package com.cw.notas;
+package com.cw.notas.Notes;
 
 public class Note {
     private String id;

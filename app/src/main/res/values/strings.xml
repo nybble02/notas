@@ -1,16 +1,29 @@
 <resources>
+    <!-- app values -->
     <string name="app_name">NOTAS</string>
     <string name="app_notes">Notes</string>
-    <string name="app_checklist">Check List</string>
+    <string name="app_checklist">Check Lists</string>
     <string name="app_todo">ToDo</string>
     <string name="app_madeBy">Made By: Nicole Jordaan</string>
     <string name="app_save">Save</string>
     <string name="app_delete">Delete</string>
+    <string name="app_cancel">Cancel</string>
+    <string name="app_yes">Yes</string>
+    <string name="app_no">No</string>
 
-
+    <!-- notes values -->
     <string name="notes_btn_addNote">Add New Note</string>
     <string name="notes_btn_editNote">Edit Note</string>
+    <string name="notes_emptyList">No notes created…</string>
+    <string name="notes_hint_title">Title</string>
+    <string name="notes_hint_content">Your note…</string>
 
+    <!-- checklist values -->
+    <string name="chkList_btn_addChk">Add a checklist</string>
+    <string name="chkList_btn_editChk">Edit Checklist</string>
+    <string name="chkList_input_listName">Enter your list name…</string>
+
+    <!-- language values -->
     <string name="lang_menu_en">English</string>
     <string name="lang_menu_fr">French</string>
     <string name="lang_menu_gr">Germany</string>
@@ -18,7 +31,6 @@
     <string name="lang_menu_ru">Russian</string>
     <string name="lang_menu_jp">Japanese</string>
     <string name="lang_menu_ch">Chinese</string>
-
 
 
 </resources>

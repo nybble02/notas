@@ -1,19 +1,19 @@
-package com.cw.notas;
+package com.cw.notas.Notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.cw.notas.Database;
+import com.cw.notas.R;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,11 +27,11 @@ public class NoteAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_add);
 
-        Button btnDelete = (Button)findViewById(R.id.btnDelete);
-        Button btnSave = (Button)findViewById(R.id.btnSave);
-        EditText noteTitle = (EditText) findViewById(R.id.etNoteTitle);
-        EditText noteContent = (EditText) findViewById(R.id.etNoteContent);
-        TextView pgTitle = (TextView) findViewById(R.id.pgTitle);
+        Button btnDelete = findViewById(R.id.btnDelete);
+        Button btnSave = findViewById(R.id.btnSave);
+        EditText noteTitle = findViewById(R.id.etNoteTitle);
+        EditText noteContent = findViewById(R.id.etNoteContent);
+        TextView pgTitle = findViewById(R.id.pgTitle);
 
 
 

@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Notes.NoteListActivity">
-
+    tools:context=".ChecklistListActivity">
 
     <TextView
         android:id="@+id/pgTitle"
-        android:layout_width="166dp"
-        android:layout_height="47dp"
+        android:layout_width="195dp"
+        android:layout_height="44dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:singleLine="true"
-        android:text="@string/app_notes"
+        android:text="@string/app_checklist"
         android:textSize="34sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,28 +23,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="30dp"
         android:layout_weight="1"
-        android:text="@string/notes_btn_addNote"
+        android:text="@string/chkList_btn_addChk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/pgEmpty"
-        android:layout_width="328dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="88dp"
-        android:singleLine="true"
-        android:text="@string/notes_emptyList"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ListView
-        android:id="@+id/noteList"
+        android:id="@+id/checklistList"
         android:layout_width="408dp"
         android:layout_height="588dp"
         android:layout_marginTop="80dp"
@@ -54,9 +39,7 @@
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811">
-
-    </ListView>
+        app:layout_constraintVertical_bias="0.811"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

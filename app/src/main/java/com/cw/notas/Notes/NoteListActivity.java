@@ -1,8 +1,7 @@
-package com.cw.notas;
+package com.cw.notas.Notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.cw.notas.Database;
+import com.cw.notas.Notes.Note;
+import com.cw.notas.Notes.NoteAddActivity;
+import com.cw.notas.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,9 @@ public class NoteListActivity extends AppCompatActivity {
 
         View btnAddNewNote = (Button)findViewById(R.id.btnAddNewNote);
 
+
+
+
          btnAddNewNote.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -44,6 +50,8 @@ public class NoteListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        TextView pgEmpty = findViewById(R.id.pgEmpty);
 
         db = new Database(getApplicationContext());
         notesDB = db.noteSelectAll();
