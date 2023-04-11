@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,19 +12,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.cw.notas.CheckboxAdapter;
 import com.cw.notas.Database;
-import com.cw.notas.Notes.Note;
-import com.cw.notas.Notes.NoteListActivity;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
@@ -35,9 +30,10 @@ import java.util.UUID;
 
 public class ChecklistViewActivity extends AppCompatActivity {
     private Database db;
-    static List<Checkbox> checkboxList = new ArrayList<Checkbox>();
+    static ArrayList<Checkbox> checkboxList = new ArrayList<Checkbox>();
     List<String[]> checkboxDB = null;
-    ArrayAdapter<Checkbox> adapter;
+    //ArrayAdapter<CheckBox> adapter;
+    CheckboxAdapter cBoxAdpater;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,7 +140,8 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
     private void populateCheckboxList(String listId) {
 
-        LinearLayout checkboxLayout = findViewById(R.id.checkboxLayout);
+
+        ListView checkboxListView = (ListView)findViewById(R.id.checkboxListView);
 
         db = new Database(getApplicationContext());
         checkboxDB = db.checkboxSelect(listId);
@@ -157,14 +154,19 @@ public class ChecklistViewActivity extends AppCompatActivity {
             checkboxObj.setTitle(checkbox[2]);
             checkboxObj.setState(checkbox[3]);
 
+            //CheckBox checkBox = new CheckBox(getApplicationContext());
+            //checkBox.setText(checkboxObj.getTitle());
+
             checkboxList.add(checkboxObj);
 
-            CheckBox checkBox = new CheckBox(getApplicationContext());
-            checkBox.setText(checkboxObj.getTitle());
-            checkboxLayout.addView(checkBox);
+            //checkboxLayout.addView(checkBox);
 
-           Toast.makeText(ChecklistViewActivity.this,  checkboxObj.getTitle(), Toast.LENGTH_SHORT).show();
+           //Toast.makeText(ChecklistViewActivity.this,  checkboxObj.getTitle(), Toast.LENGTH_SHORT).show();
 
         }
+        cBoxAdpater = new CheckboxAdapter(ChecklistViewActivity.this, checkboxList);
+        //adapter = new ArrayAdapter<CheckBox>(this, android.R.layout.simple_list_item_1, checkboxList);
+        checkboxListView.setAdapter(cBoxAdpater);
+        checkboxListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 }

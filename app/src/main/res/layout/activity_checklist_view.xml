@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+ <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <!--<ListView
+    <ListView
         android:id="@+id/checkboxListView"
         android:layout_width="408dp"
         android:layout_height="588dp"
@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811"/> -->
+        app:layout_constraintVertical_bias="0.811"/>
 
     <Button
         android:id="@+id/btnAddCheckbox"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toEndOf="@+id/pgTitle"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/checkboxLayout"
         android:layout_width="390dp"
         android:layout_height="616dp"
@@ -51,7 +51,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pgTitle"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/pgTitle"></LinearLayout> -->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
