@@ -1,8 +1,10 @@
-package com.cw.notas;
+package com.cw.notas.Checklist;
 
+import static android.app.PendingIntent.getActivity;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cw.notas.Notes.Note;
-import com.cw.notas.Notes.NoteAddActivity;
-import com.cw.notas.Notes.NoteListActivity;
+import com.cw.notas.Database;
+import com.cw.notas.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,43 +40,66 @@ public class ChecklistListActivity extends AppCompatActivity {
 
         Button btnAddNewList = findViewById(R.id.btnAddNewNote);
 
+
         btnAddNewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChecklistListActivity.this);
-                AlertDialog alert = builder.create();
                 LayoutInflater inflater = getLayoutInflater();
 
+                // Set view to show custom dialog
+                View dialogView = inflater.inflate(R.layout.dialog_add_list, null);
+                // Get title of list from custom dialog box
+                EditText etListTitle = (EditText)dialogView.findViewById(R.id.listTitle);
 
-                builder.setView(inflater.inflate(R.layout.dialog_add_list, null))
-                        .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                builder.setView(dialogView)
+                .setTitle(R.string.chkList_create_list)
+                .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
 
-                                EditText listTitle = alert.findViewById(R.id.listTitle);
+                        UUID uuid = UUID.randomUUID(); // Generate random unique id
 
-                                UUID uuid = UUID.randomUUID(); // Generate random unique id
-                                String checklistId = uuid.toString();
+                        String listTitle = String.valueOf(etListTitle.getText());
+                        String listId = uuid.toString();
 
-                                db = new Database(getApplicationContext());
-                                db.checklistInsert(checklistId,String.valueOf(listTitle.getText()));
+                        db = new Database(getApplicationContext());
+                        db.checklistInsert(listId, listTitle);
 
-                                Toast.makeText(ChecklistListActivity.this, "Checklist successfully created!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChecklistListActivity.this, "List successfully created!", Toast.LENGTH_SHORT).show();
 
-                            }
-                        }).setNegativeButton(R.string.app_cancel, null).show();
+                        dialogBoxOnClose();
+                    }
+                }).setNegativeButton(R.string.app_cancel, null).show();
             }
         });
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
 
         TextView pgEmpty = findViewById(R.id.pgEmpty);
+        populateChecklistList();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        removeChecklistList();
+    }
+
+
+    private void dialogBoxOnClose() {
+        removeChecklistList();
+        populateChecklistList();
+    }
+
+    private void populateChecklistList() {
 
         db = new Database(getApplicationContext());
-        checklistDB = db.noteSelectAll();
+        checklistDB = db.checklistSelectAll();
 
         for (String[] list : checklistDB) {
             Checklist checklistObj = new Checklist();
@@ -85,7 +109,6 @@ public class ChecklistListActivity extends AppCompatActivity {
             checklistList.add(checklistObj);
 
         }
-
         adapter = new ArrayAdapter<Checklist>(this, android.R.layout.simple_list_item_1, checklistList);
         adapter.notifyDataSetChanged();
 
@@ -98,15 +121,23 @@ public class ChecklistListActivity extends AppCompatActivity {
 
                 Toast.makeText(ChecklistListActivity.this, checklistList.get(i).getId(), Toast.LENGTH_SHORT).show();
 
-
-                /*Intent intent = new Intent(getApplicationContext(), NoteAddActivity.class);
-                intent.putExtra("noteId", checklistList.get(i).getId());
-                startActivity(intent);*/
+                Intent intent = new Intent(getApplicationContext(), ChecklistViewActivity.class);
+                intent.putExtra("listId", checklistList.get(i).getId());
+                startActivity(intent);
             }
         });
-
-
     }
+
+    private void removeChecklistList() {
+        checklistList.removeAll(checklistList);
+        adapter.notifyDataSetChanged();
+    }
+
+
+
+
+
+
 
 
 }

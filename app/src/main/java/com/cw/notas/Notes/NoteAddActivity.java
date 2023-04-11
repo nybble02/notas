@@ -33,8 +33,6 @@ public class NoteAddActivity extends AppCompatActivity {
         EditText noteContent = findViewById(R.id.etNoteContent);
         TextView pgTitle = findViewById(R.id.pgTitle);
 
-
-
         Intent intent = getIntent();
         String noteId = intent.getStringExtra("noteId");
 

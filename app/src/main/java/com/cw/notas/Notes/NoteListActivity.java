@@ -33,9 +33,6 @@ public class NoteListActivity extends AppCompatActivity {
 
         View btnAddNewNote = (Button)findViewById(R.id.btnAddNewNote);
 
-
-
-
          btnAddNewNote.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -74,6 +71,7 @@ public class NoteListActivity extends AppCompatActivity {
         ListView noteListView = (ListView)findViewById(R.id.noteList);
         noteListView.setAdapter(adapter);
 
+        // TODO: LongClick Listener - delete
         noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

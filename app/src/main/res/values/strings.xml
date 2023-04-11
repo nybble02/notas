@@ -22,6 +22,13 @@
     <string name="chkList_btn_addChk">Add a checklist</string>
     <string name="chkList_btn_editChk">Edit Checklist</string>
     <string name="chkList_input_listName">Enter your list name…</string>
+    <string name="chkList_create_list">Create new List</string>
+
+    <string name="chkbox_add_title">Add Checkbox</string>
+    <string name="chkbox_input_listName">Enter your task name…</string>
+    <string name="chk_options_menu_delete">Delete List</string>
+    <string name="chk_options_menu_addChkBox">Add Task</string>
+
 
     <!-- language values -->
     <string name="lang_menu_en">English</string>
@@ -31,6 +38,8 @@
     <string name="lang_menu_ru">Russian</string>
     <string name="lang_menu_jp">Japanese</string>
     <string name="lang_menu_ch">Chinese</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

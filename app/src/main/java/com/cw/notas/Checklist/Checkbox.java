@@ -1,4 +1,6 @@
-package com.cw.notas;
+package com.cw.notas.Checklist;
+
+import androidx.annotation.NonNull;
 
 import java.util.Calendar;
 import java.util.List;
@@ -7,12 +9,12 @@ public class Checkbox {
     private String id;
     private String listId;
     private String title;
-    private Boolean state;
+    private String state;
 //    private Calendar dueDate;
 
     public Checkbox() {}
 
-    public Checkbox(String id, String listId, String title, Boolean state) {
+    public Checkbox(String id, String listId, String title, String state) {
         this.id = id;
         this.listId = listId;
         this.title = title;
@@ -21,8 +23,7 @@ public class Checkbox {
     }
 
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String id) {this.id = id;
     }
     public String getId () {
         return this.id;
@@ -44,14 +45,17 @@ public class Checkbox {
         return this.title;
     }
 
-    public void setState(Boolean state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public Boolean getState () {
+    public String getState () {
         return this.state;
     }
 
 
-
+    @Override
+    public String toString() {
+        return title;
+    }
 }

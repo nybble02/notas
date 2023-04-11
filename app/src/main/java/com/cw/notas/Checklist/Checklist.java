@@ -1,16 +1,14 @@
-package com.cw.notas;
+package com.cw.notas.Checklist;
 
 import java.util.List;
 
 public class Checklist {
-
     private String id;
     private String title;
     private List<Checkbox> checkboxList;
     //private String dateCreated;
 
     public Checklist() {}
-
     public Checklist(String id, String title, List<Checkbox> checkboxList) {
         this.id = id;
         this.title = title;

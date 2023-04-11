@@ -12,10 +12,10 @@
         android:theme="@style/Theme.Notas"
         tools:targetApi="31">
         <activity
-            android:name=".ChecklistAddActivity"
+            android:name=".Checklist.ChecklistViewActivity"
             android:exported="false" />
         <activity
-            android:name=".ChecklistListActivity"
+            android:name=".Checklist.ChecklistListActivity"
             android:exported="false" />
         <activity
             android:name=".Notes.NoteAddActivity"
