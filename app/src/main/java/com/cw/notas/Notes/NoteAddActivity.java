@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cw.notas.Database;
+import com.cw.notas.MainActivity;
 import com.cw.notas.R;
 
 import java.time.LocalDateTime;
@@ -109,5 +110,15 @@ public class NoteAddActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
+        startActivity(intent);
+
+        this.finish();
     }
 }

@@ -12,18 +12,19 @@
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/notes_btn_addNote"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/etNoteTitle"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/etNoteContent"
-        android:layout_width="373dp"
-        android:layout_height="493dp"
+        android:layout_width="0dp"
+        android:layout_height="487dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="8dp"
@@ -53,8 +54,8 @@
         android:id="@+id/etNoteTitle"
         android:layout_width="344dp"
         android:layout_height="54dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:hint="@string/notes_hint_title"
         android:inputType="textPersonName"
@@ -73,6 +74,8 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnSave"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNoteContent" />
+        app:layout_constraintTop_toBottomOf="@+id/etNoteContent"
+        app:layout_constraintVertical_bias="0.821" />
 </androidx.constraintlayout.widget.ConstraintLayout>

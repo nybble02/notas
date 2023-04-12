@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cw.notas.BaseActivity;
 import com.cw.notas.Database;
+import com.cw.notas.MainActivity;
 import com.cw.notas.Notes.Note;
 import com.cw.notas.Notes.NoteAddActivity;
 import com.cw.notas.R;
@@ -19,7 +21,7 @@ import com.cw.notas.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NoteListActivity extends AppCompatActivity {
+public class NoteListActivity extends BaseActivity {
     Database db;
     static List<Note> noteList = new ArrayList<Note>();
     List<String[]> notesDB = null;
@@ -30,8 +32,9 @@ public class NoteListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_list);
+        onCreateDrawer();
 
-        View btnAddNewNote = (Button)findViewById(R.id.btnAddNewNote);
+        View btnAddNewNote = findViewById(R.id.btnAddNewNote);
 
          btnAddNewNote.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -47,8 +50,6 @@ public class NoteListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        TextView pgEmpty = findViewById(R.id.pgEmpty);
 
         db = new Database(getApplicationContext());
         notesDB = db.noteSelectAll();
@@ -90,5 +91,13 @@ public class NoteListActivity extends AppCompatActivity {
         super.onStop();
         noteList.removeAll(noteList);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 }

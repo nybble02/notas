@@ -14,11 +14,11 @@ import android.util.Log;
 
 public class Database {
 
-    // TODO: Add insert, delete and update methods for checklist
-    // TODO: Add insert, delete and update methods for checkbox
+    // TODO: Add delete and update methods for checklist
+    // TODO: Add delete and update methods for checkbox
 
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 19;
+    private static int DATABASE_VERSION = 20;
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
@@ -168,6 +168,16 @@ public class Database {
             return checkboxList;
         }
 
+    }
+
+    public void checkboxUpdate(String checkboxId, String title, String state) {
+        ContentValues checkboxValues = new ContentValues();
+        checkboxValues.put("id", checkboxId);
+        checkboxValues.put("title", title);
+        checkboxValues.put("state", state);
+
+        db.update("checkbox", checkboxValues, "id=?",new String[]{checkboxId});
+        db.close();
     }
 
 

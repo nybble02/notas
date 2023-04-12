@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cw.notas.Database;
+import com.cw.notas.MainActivity;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class ChecklistListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checklist_list);
 
-        Button btnAddNewList = findViewById(R.id.btnAddNewNote);
+        Button btnAddNewList = findViewById(R.id.btnAddNewChecklist);
 
 
         btnAddNewList.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +81,6 @@ public class ChecklistListActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        TextView pgEmpty = findViewById(R.id.pgEmpty);
         populateChecklistList();
     }
 
@@ -131,6 +131,14 @@ public class ChecklistListActivity extends AppCompatActivity {
     private void removeChecklistList() {
         checklistList.removeAll(checklistList);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        this.finish();
     }
 
 

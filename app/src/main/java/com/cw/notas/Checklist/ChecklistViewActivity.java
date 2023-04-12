@@ -12,12 +12,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cw.notas.CheckboxAdapter;
 import com.cw.notas.Database;
@@ -31,9 +33,11 @@ import java.util.UUID;
 public class ChecklistViewActivity extends AppCompatActivity {
     private Database db;
     static ArrayList<Checkbox> checkboxList = new ArrayList<Checkbox>();
+    static ArrayList<Checkbox> checkboxList_checked = new ArrayList<Checkbox>();
     List<String[]> checkboxDB = null;
-    //ArrayAdapter<CheckBox> adapter;
-    CheckboxAdapter cBoxAdpater;
+
+    CheckboxAdapter checkboxAdapter;
+    CheckboxAdapter checkboxAdapter_checked;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,9 +74,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String listId = intent.getStringExtra("listId");
-
-        //ListView checkboxListView = (ListView)findViewById(R.id.checkboxListView);
-
 
         btnAddCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +143,9 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
 
         ListView checkboxListView = (ListView)findViewById(R.id.checkboxListView);
+        ListView checkboxListView_checked = (ListView)findViewById(R.id.checkboxListView_checked);
+        Boolean isChecked = false;
+
 
         db = new Database(getApplicationContext());
         checkboxDB = db.checkboxSelect(listId);
@@ -154,19 +158,33 @@ public class ChecklistViewActivity extends AppCompatActivity {
             checkboxObj.setTitle(checkbox[2]);
             checkboxObj.setState(checkbox[3]);
 
-            //CheckBox checkBox = new CheckBox(getApplicationContext());
-            //checkBox.setText(checkboxObj.getTitle());
-
-            checkboxList.add(checkboxObj);
-
-            //checkboxLayout.addView(checkBox);
-
-           //Toast.makeText(ChecklistViewActivity.this,  checkboxObj.getTitle(), Toast.LENGTH_SHORT).show();
-
+            if (checkboxObj.getState() == "1") {
+                checkboxList_checked.add(checkboxObj);
+                isChecked = true;
+            }else {
+                checkboxList.add(checkboxObj);
+            }
         }
-        cBoxAdpater = new CheckboxAdapter(ChecklistViewActivity.this, checkboxList);
-        //adapter = new ArrayAdapter<CheckBox>(this, android.R.layout.simple_list_item_1, checkboxList);
-        checkboxListView.setAdapter(cBoxAdpater);
-        checkboxListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        checkboxAdapter = new CheckboxAdapter(ChecklistViewActivity.this, checkboxList);
+        checkboxAdapter_checked = new CheckboxAdapter(ChecklistViewActivity.this, checkboxList_checked);
+        getChecked();
+        checkboxListView.setAdapter(checkboxAdapter);
+        checkboxListView_checked.setAdapter(checkboxAdapter_checked);
+
     }
+
+    private ArrayList<Checkbox> getChecked() {
+        for (int i = 0; i < checkboxAdapter.getCount(); i++) {
+            if(checkboxAdapter.checkedHolder[i]) {
+                checkboxList_checked.get(i).getTitle();
+                Toast.makeText(ChecklistViewActivity.this, checkboxList_checked.get(i).getTitle() , Toast.LENGTH_SHORT).show();
+                //checkboxAdapter.notifyDataSetChanged();
+            }
+        }
+        return checkboxList_checked;
+    }
+
+
 }
+

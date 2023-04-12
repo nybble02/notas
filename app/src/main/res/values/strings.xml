@@ -38,8 +38,10 @@
     <string name="lang_menu_ru">Russian</string>
     <string name="lang_menu_jp">Japanese</string>
     <string name="lang_menu_ch">Chinese</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
 
 
 </resources>
