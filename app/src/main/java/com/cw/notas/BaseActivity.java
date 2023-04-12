@@ -3,6 +3,7 @@ package com.cw.notas;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -61,6 +62,16 @@ public class BaseActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+       if( drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+           drawerLayout.closeDrawer(Gravity.LEFT);
+       } else {
+           super.onBackPressed();
+       }
     }
 
 }

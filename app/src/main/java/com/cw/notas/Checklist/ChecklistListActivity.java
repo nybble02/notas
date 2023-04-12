@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cw.notas.BaseActivity;
 import com.cw.notas.Database;
 import com.cw.notas.MainActivity;
 import com.cw.notas.R;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ChecklistListActivity extends AppCompatActivity {
+public class ChecklistListActivity extends BaseActivity {
     private Database db;
 
     static List<Checklist> checklistList = new ArrayList<Checklist>();
@@ -38,6 +39,8 @@ public class ChecklistListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checklist_list);
+        onCreateDrawer();
+
 
         Button btnAddNewList = findViewById(R.id.btnAddNewChecklist);
 
@@ -132,19 +135,6 @@ public class ChecklistListActivity extends AppCompatActivity {
         checklistList.removeAll(checklistList);
         adapter.notifyDataSetChanged();
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-        this.finish();
-    }
-
-
-
-
-
 
 
 

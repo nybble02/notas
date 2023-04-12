@@ -1,6 +1,7 @@
 package com.cw.notas;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,21 +22,24 @@ import com.cw.notas.Checklist.ChecklistViewActivity;
 import com.cw.notas.Notes.NoteAddActivity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class CheckboxAdapter extends BaseAdapter{
+public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
     protected Database db;
     protected Context context;
     protected ArrayList<Checkbox> checkboxes;
-    public boolean[] checkedHolder;
+    public Boolean[] checkedHolder;
     protected LayoutInflater inflater;
+    CheckBox cBox;
+    TextView checkboxTitle;
 
 
-    public CheckboxAdapter(Context context, ArrayList<Checkbox> checkboxes) {
+    public CheckboxAdapter(Context context, int resource, ArrayList<Checkbox> checkboxes) {
+        super(context, resource, checkboxes);
         this.context = context;
         this.checkboxes = checkboxes;
         this.inflater = LayoutInflater.from(context);
-
-        createCheckedHolder();
+        this.checkedHolder = new Boolean[checkboxes.size()];
     }
 
     @Override
@@ -61,69 +65,55 @@ public class CheckboxAdapter extends BaseAdapter{
             view = (LinearLayout) inflater.inflate(R.layout.view_checkbox_list_adapter, viewGroup, false);
         }
 
-        Checkbox currentCheckbox = getItem(position);
+        Checkbox currentCheckbox = (Checkbox)getItem(position);
 
-        TextView checboxTitle = view.findViewById(R.id.checkboxTitle);
-        checboxTitle.setText(currentCheckbox.getTitle());
+        checkboxTitle = view.findViewById(R.id.checkboxTitle);
+        checkboxTitle.setText(currentCheckbox.getTitle());
 
-        CheckBox cBox =  view.findViewById(R.id.checboxBox);
+        cBox =  view.findViewById(R.id.checkboxBox);
 
-        cBox.setChecked(checkedHolder[position]);
-
-        if(currentCheckbox.getState() == "1")  {
+        if(Objects.equals(currentCheckbox.getState(), "1")) {
             cBox.setChecked(true);
-        }
-        else {
+       //   Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
+
+        } else {
             cBox.setChecked(false);
+   //        Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
+
         }
 
         cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-                checkedHolder[position] = isChecked;
+
+                if(isChecked) {
+                    currentCheckbox.setState("1");
+                    //checkboxTitle.setPaintFlags(checkboxTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    //Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    currentCheckbox.setState("0");
+                    //checkboxTitle.setPaintFlags(checkboxTitle.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                    //Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
+
+                }
+
+               db = new Database(context.getApplicationContext());
+               db.checkboxUpdate(String.valueOf(currentCheckbox.getId()), String.valueOf(currentCheckbox.getTitle()), String.valueOf(currentCheckbox.getState()));
+               Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
 
 
             }
         });
 
-       /* cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                String strIsChecked;
 
-                if (isChecked)  {
-                     strIsChecked = "1";
-                } else {
-                     strIsChecked = "0";
-                }
-
-                db = new Database(context.getApplicationContext());
-                db.checkboxUpdate(currentCheckbox.getId(),currentCheckbox.getTitle(), strIsChecked);
-
-
-
-
-            }
-
-        });*/
-
-        /*cBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Boolean isChecked = cBox.isChecked();
-                Toast.makeText(context.getApplicationContext(), currentCheckbox.getTitle() + " " + isChecked, Toast.LENGTH_SHORT).show();
-
-
-
-            }
-        });*/
         return view;
     }
 
-    private void createCheckedHolder() {
-        checkedHolder = new boolean[getCount()];
-    }
+
+
 
 
 
