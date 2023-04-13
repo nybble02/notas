@@ -2,5 +2,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/option_add" android:title="@string/chk_options_menu_addChkBox"></item>
     <item android:id="@+id/option_delete_list" android:title="@string/chk_options_menu_delete"></item>
-    <item android:id="@+id/option_delete_cbox" android:title="@string/chk_options_menu_delChkBox"></item>
 </menu>

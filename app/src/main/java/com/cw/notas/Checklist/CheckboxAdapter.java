@@ -1,4 +1,4 @@
-package com.cw.notas;
+package com.cw.notas.Checklist;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -24,7 +24,9 @@ import android.widget.Toast;
 import com.cw.notas.Checklist.Checkbox;
 import com.cw.notas.Checklist.ChecklistListActivity;
 import com.cw.notas.Checklist.ChecklistViewActivity;
+import com.cw.notas.Database;
 import com.cw.notas.Notes.NoteAddActivity;
+import com.cw.notas.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -98,17 +100,13 @@ public class CheckboxAdapter extends BaseAdapter{
                 new AlertDialog.Builder(context)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Are you sure?")
-                        .setMessage("Delete this list?")
+                        .setMessage("Delete this task?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 db = new Database(context.getApplicationContext());
                                 db.checkboxDelete(currentCheckbox.getId());
-                              //  Toast.makeText(context.getApplicationContext(), "Checklist successfully deleted!", Toast.LENGTH_SHORT).show();
-                               // Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
-
                                 notifyDataSetChanged();
-
                                 Intent intent = new Intent("Check_Box_Delete");
                                 context.sendBroadcast(intent);
 
@@ -122,8 +120,6 @@ public class CheckboxAdapter extends BaseAdapter{
         cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-
-
                 if(isChecked) {
                     currentCheckbox.setState("1");
 
@@ -133,9 +129,6 @@ public class CheckboxAdapter extends BaseAdapter{
 
                db = new Database(context.getApplicationContext());
                db.checkboxUpdate(String.valueOf(currentCheckbox.getId()), String.valueOf(currentCheckbox.getTitle()), String.valueOf(currentCheckbox.getState()));
-               //Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
-
-
             }
         });
 

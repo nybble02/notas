@@ -121,9 +121,6 @@ public class ChecklistListActivity extends BaseActivity {
         checklistListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Toast.makeText(ChecklistListActivity.this, checklistList.get(i).getId(), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(getApplicationContext(), ChecklistViewActivity.class);
                 intent.putExtra("listId", checklistList.get(i).getId());
                 startActivity(intent);

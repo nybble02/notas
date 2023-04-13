@@ -1,8 +1,6 @@
 package com.cw.notas.Checklist;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,19 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cw.notas.CheckboxAdapter;
 import com.cw.notas.Database;
-import com.cw.notas.Notes.NoteAddActivity;
-import com.cw.notas.Notes.NoteListActivity;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
@@ -69,7 +59,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
             case R.id.option_delete_list:
                 onDeleteList(listId);
                 break;
-            case R.id.option_delete_cbox:
         }
         return false;
     }
