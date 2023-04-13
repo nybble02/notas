@@ -18,7 +18,7 @@ public class Database {
     // TODO: Add delete and update methods for checkbox
 
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 20;
+    private static int DATABASE_VERSION = 22;
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
@@ -124,6 +124,13 @@ public class Database {
     }
 
 
+    public void checklistDelete(String listId) {
+        db.delete("checkbox", "listId=?", new String[]{listId});
+        db.delete("checklist", "id=?", new String[]{listId});
+        db.close();
+    }
+
+
     // Checkbox SQl
     public long checkboxInsert(String id, String listId, String title, String state) {
         this.insertCheckbox.bindString(1, id);
@@ -177,6 +184,11 @@ public class Database {
         checkboxValues.put("state", state);
 
         db.update("checkbox", checkboxValues, "id=?",new String[]{checkboxId});
+        db.close();
+    }
+
+    public void checkboxDelete(String id) {
+        db.delete("checkbox", "id=?", new String[]{id});
         db.close();
     }
 

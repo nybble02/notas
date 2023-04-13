@@ -1,6 +1,9 @@
 package com.cw.notas;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.text.Layout;
 import android.util.Log;
@@ -9,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -24,7 +29,7 @@ import com.cw.notas.Notes.NoteAddActivity;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
+public class CheckboxAdapter extends BaseAdapter{
     protected Database db;
     protected Context context;
     protected ArrayList<Checkbox> checkboxes;
@@ -33,13 +38,14 @@ public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
     CheckBox cBox;
     TextView checkboxTitle;
 
+    ImageButton checkboxDelete;
 
-    public CheckboxAdapter(Context context, int resource, ArrayList<Checkbox> checkboxes) {
-        super(context, resource, checkboxes);
+
+    public CheckboxAdapter(Context context, ArrayList<Checkbox> checkboxes) {
+      //  super(context, resource, checkboxes);
         this.context = context;
         this.checkboxes = checkboxes;
         this.inflater = LayoutInflater.from(context);
-        this.checkedHolder = new Boolean[checkboxes.size()];
     }
 
     @Override
@@ -58,6 +64,8 @@ public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
     }
 
 
+
+
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         LinearLayout linearLayout = (LinearLayout) view;
@@ -70,17 +78,46 @@ public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
         checkboxTitle = view.findViewById(R.id.checkboxTitle);
         checkboxTitle.setText(currentCheckbox.getTitle());
 
+        checkboxDelete = (ImageButton) view.findViewById(R.id.btnDeleteCheckbox);
+
         cBox =  view.findViewById(R.id.checkboxBox);
 
         if(Objects.equals(currentCheckbox.getState(), "1")) {
             cBox.setChecked(true);
-       //   Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
+            //   Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
 
         } else {
             cBox.setChecked(false);
    //        Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
 
         }
+
+        checkboxDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new AlertDialog.Builder(context)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Are you sure?")
+                        .setMessage("Delete this list?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                db = new Database(context.getApplicationContext());
+                                db.checkboxDelete(currentCheckbox.getId());
+                              //  Toast.makeText(context.getApplicationContext(), "Checklist successfully deleted!", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
+
+                                notifyDataSetChanged();
+
+                                Intent intent = new Intent("Check_Box_Delete");
+                                context.sendBroadcast(intent);
+
+                            }
+                        }).setNegativeButton("No", null).show();
+
+
+            }
+        });
 
         cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -89,20 +126,14 @@ public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
 
                 if(isChecked) {
                     currentCheckbox.setState("1");
-                    //checkboxTitle.setPaintFlags(checkboxTitle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    //Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
-
 
                 } else {
                     currentCheckbox.setState("0");
-                    //checkboxTitle.setPaintFlags(checkboxTitle.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
-                    //Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
-
                 }
 
                db = new Database(context.getApplicationContext());
                db.checkboxUpdate(String.valueOf(currentCheckbox.getId()), String.valueOf(currentCheckbox.getTitle()), String.valueOf(currentCheckbox.getState()));
-               Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
+               //Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getTitle()) + " " + String.valueOf(currentCheckbox.getState()) , Toast.LENGTH_SHORT).show();
 
 
             }
@@ -111,6 +142,7 @@ public class CheckboxAdapter extends ArrayAdapter<Checkbox>{
 
         return view;
     }
+
 
 
 

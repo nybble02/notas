@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,9 +14,19 @@
 
     <TextView
         android:id="@+id/checkboxTitle"
-        android:layout_width="match_parent"
+        android:layout_width="252dp"
         android:layout_height="wrap_content"
         android:gravity="bottom|left"
         android:textColor="@android:color/black"
         android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/btnDeleteCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/app_delete"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+
 </LinearLayout>

@@ -19,7 +19,7 @@
     <string name="notes_hint_content">Your note…</string>
 
     <!-- checklist values -->
-    <string name="chkList_btn_addChk">Add a checklist</string>
+    <string name="chkList_btn_addChk">Add Checklist</string>
     <string name="chkList_btn_editChk">Edit Checklist</string>
     <string name="chkList_input_listName">Enter your list name…</string>
     <string name="chkList_create_list">Create new List</string>
@@ -28,6 +28,7 @@
     <string name="chkbox_input_listName">Enter your task name…</string>
     <string name="chk_options_menu_delete">Delete List</string>
     <string name="chk_options_menu_addChkBox">Add Task</string>
+    <string name="chk_options_menu_delChkBox">Delete Selected Tasks</string>
 
 
     <!-- language values -->

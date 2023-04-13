@@ -1,11 +1,17 @@
 package com.cw.notas.Checklist;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,11 +24,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cw.notas.CheckboxAdapter;
 import com.cw.notas.Database;
+import com.cw.notas.Notes.NoteAddActivity;
 import com.cw.notas.Notes.NoteListActivity;
 import com.cw.notas.R;
 
@@ -34,6 +42,7 @@ import java.util.UUID;
 public class ChecklistViewActivity extends AppCompatActivity {
     private Database db;
     static ArrayList<Checkbox> checkboxList = new ArrayList<Checkbox>();
+    static List<String> checkboxList_checked;
     List<String[]> checkboxDB = null;
 
     CheckboxAdapter checkboxAdapter;
@@ -55,14 +64,18 @@ public class ChecklistViewActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.option_add:
-                //openCheckBoxDialogBox();
+                openDialog();
                 break;
-            case R.id.option_delete:
-                //TODO: delete list
+            case R.id.option_delete_list:
+                onDeleteList(listId);
                 break;
+            case R.id.option_delete_cbox:
         }
         return false;
     }
+    TextView pgTitle;
+    Intent intent;
+    String listId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,45 +83,12 @@ public class ChecklistViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checklist_view);
 
 
-        checkboxAdapter = new CheckboxAdapter(ChecklistViewActivity.this,1, checkboxList);
+        pgTitle = findViewById(R.id.pgTitle);
+        //  Button btnAddCheckbox = findViewById(R.id.btnAddCheckbox);
 
-        TextView pgTitle = findViewById(R.id.pgTitle);
-        Button btnAddCheckbox = findViewById(R.id.btnAddCheckbox);
-
-        Intent intent = getIntent();
-        String listId = intent.getStringExtra("listId");
-
-        btnAddCheckbox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ChecklistViewActivity.this);
-                LayoutInflater inflater = getLayoutInflater();
-
-                // Set view to show custom dialog
-                View dialogView = inflater.inflate(R.layout.dialog_add_checkbox, null);
-                // Get title of list from custom dialog box
-                EditText etCheckboxTitle = dialogView.findViewById(R.id.checkboxTitle);
-
-                builder.setView(dialogView)
-                        .setTitle(R.string.chkbox_add_title)
-                        .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                UUID uuid = UUID.randomUUID(); // Generate random unique id
-
-                                String checkboxTitle = String.valueOf(etCheckboxTitle.getText());
-                                String checkboxId = uuid.toString();
-
-                                db = new Database(getApplicationContext());
-                                db.checkboxInsert(checkboxId, listId, checkboxTitle,"0");
-
-                                onDialogBoxClose(listId);
-
-                            }
-                        }).setNegativeButton(R.string.app_cancel, null).show();
-            }
-        });
+        intent = getIntent();
+        registerReceiver(cBoxDelete, new IntentFilter("Check_Box_Delete"));
+        listId = intent.getStringExtra("listId");
 
         for (Checklist list : ChecklistListActivity.checklistList) {
             if (Objects.equals(list.getId(), listId)) {
@@ -118,14 +98,24 @@ public class ChecklistViewActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     @Override
     protected void onStart() {
         super.onStart();
         Intent intent = getIntent();
         String listId = intent.getStringExtra("listId");
-
         populateCheckboxList(listId);
     }
+
+    // Gets
+   private BroadcastReceiver  cBoxDelete = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            onDialogBoxClose(listId);
+        }
+    };
 
     @Override
     protected void onStop() {
@@ -133,10 +123,60 @@ public class ChecklistViewActivity extends AppCompatActivity {
         removeCheckbox();
     }
 
+    private void openDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(ChecklistViewActivity.this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        // Set view to show custom dialog
+        View dialogView = inflater.inflate(R.layout.dialog_add_checkbox, null);
+        // Get title of list from custom dialog box
+        EditText etCheckboxTitle = dialogView.findViewById(R.id.checkboxTitle);
+
+        builder.setView(dialogView)
+                .setTitle(R.string.chkbox_add_title)
+                .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        UUID uuid = UUID.randomUUID(); // Generate random unique id
+
+                        String checkboxTitle = String.valueOf(etCheckboxTitle.getText());
+                        String checkboxId = uuid.toString();
+
+                        db = new Database(getApplicationContext());
+                        db.checkboxInsert(checkboxId, listId, checkboxTitle,"0");
+
+                        onDialogBoxClose(listId);
+
+                    }
+                }).setNegativeButton(R.string.app_cancel, null).show();
+    }
+
     private void onDialogBoxClose(String listId){
         removeCheckbox();
         populateCheckboxList(listId);
     }
+
+
+
+    private void onDeleteList(String listId) {
+        new android.app.AlertDialog.Builder(ChecklistViewActivity.this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Are you sure?")
+                .setMessage("Delete this list?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        db = new Database(getApplicationContext());
+                        db.checklistDelete(listId);
+                        Toast.makeText(ChecklistViewActivity.this, "Checklist successfully deleted!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), ChecklistListActivity.class);
+                        startActivity(intent);
+                    }
+
+                }).setNegativeButton("No", null).show();
+    }
+
 
     private void removeCheckbox() {
         checkboxList.removeAll(checkboxList);
@@ -147,7 +187,7 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
 
         ListView checkboxListView = (ListView)findViewById(R.id.checkboxListView);
-        ListView checkboxListView_checked = (ListView)findViewById(R.id.checkboxListView_checked);
+        //ListView checkboxListView_checked = (ListView)findViewById(R.id.checkboxListView_checked);
         Boolean isChecked = false;
 
 
@@ -164,7 +204,17 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
             checkboxList.add(checkboxObj);
         }
+        checkboxAdapter = new CheckboxAdapter(ChecklistViewActivity.this, checkboxList);
         checkboxListView.setAdapter(checkboxAdapter);
+        checkboxAdapter.notifyDataSetChanged();
+
+        checkboxListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(ChecklistViewActivity.this, checkboxList.get(i).getTitle() + " " + checkboxList.get(i).getState(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
 
 
     }
@@ -178,20 +228,5 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
         this.finish();
     }
-
-   /* private ArrayList<Checkbox> getChecked() {
-        for (int i = 0; i < checkboxAdapter.getCount(); i++) {
-            if(checkboxAdapter.checkedHolder[i]) {
-
-                Toast.makeText(ChecklistViewActivity.this, checkboxList_checked.get(i).getTitle() , Toast.LENGTH_SHORT).show();
-                //checkboxAdapter.notifyDataSetChanged();
-            }
-        }
-        return checkboxList_checked;
-    }*/
-
-
-
-
 }
 
