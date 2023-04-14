@@ -7,26 +7,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="668dp"
+            android:layout_marginTop="150dp"
+            android:text="@string/app_welcome"
+            android:textAlignment="center"
+            android:textSize="34sp" />
 
         <TextView
-            android:id="@+id/appTitle"
-            android:layout_width="166dp"
-            android:layout_height="47dp"
-            android:layout_marginStart="122dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="123dp"
-            android:layout_marginBottom="668dp"
-            android:text="@string/app_name"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
             android:textAlignment="center"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+            android:textSize="20dp"
+            android:text="@string/app_welcome2" />
+
+        <Button
+            android:id="@+id/btnNotify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_notify"
+            app:icon="@android:drawable/ic_popup_reminder" />
+
+
+    </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navDrawer"

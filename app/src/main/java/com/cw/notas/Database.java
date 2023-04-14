@@ -18,7 +18,7 @@ public class Database {
     // TODO: Add delete and update methods for checkbox
 
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 22;
+    private static int DATABASE_VERSION = 24;
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
@@ -97,7 +97,6 @@ public class Database {
         this.insertChecklist.bindString(2, title);
         return this.insertChecklist.executeInsert();
     }
-
     public List<String[]> checklistSelectAll() {
         List<String[]> checklistList = new ArrayList<String[]>();
 
@@ -122,8 +121,6 @@ public class Database {
         cursor.close();
         return checklistList;
     }
-
-
     public void checklistDelete(String listId) {
         db.delete("checkbox", "listId=?", new String[]{listId});
         db.delete("checklist", "id=?", new String[]{listId});
@@ -143,13 +140,9 @@ public class Database {
     public List<String[]> checkboxSelect(String listId) {
         List<String[]> checkboxList = new ArrayList<String[]>();
 
-        //Cursor cursor = db.rawQuery(SELECT_CHECKBOX, new String[]{listId});
         Cursor cursor;
         try {
              cursor = db.rawQuery(SELECT_CHECKBOX, new String[]{listId});
-
-
-            //Cursor cursor = db.query("checkbox", new String[]{"id","listId", "title", "state"}, null, null, null, null, null);
             int count = 0;
 
             if (cursor.moveToFirst()) {

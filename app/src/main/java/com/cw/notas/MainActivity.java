@@ -1,13 +1,18 @@
 package com.cw.notas;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,7 +44,18 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
         onCreateDrawer();
+
+
+
+
+        Button btnNotify = findViewById(R.id.btnNotify);
+
+
+
     }
+
+
+
 
 
 }

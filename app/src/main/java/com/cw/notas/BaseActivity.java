@@ -42,12 +42,20 @@ public class BaseActivity extends AppCompatActivity {
                 Intent intent;
                 switch (item.getItemId())
                 {
+                    case R.id.navHome:
+                        intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        break;
                     case R.id.navNotes:
                         intent = new Intent(getApplicationContext(), NoteListActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.navChecklist:
                         intent = new Intent(getApplicationContext(), ChecklistListActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.navTodos:
+                        intent = new Intent(getApplicationContext(), TodoViewActivity.class);
                         startActivity(intent);
                         break;
                 }

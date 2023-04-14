@@ -39,7 +39,6 @@ public class CheckboxAdapter extends BaseAdapter{
     protected LayoutInflater inflater;
     CheckBox cBox;
     TextView checkboxTitle;
-
     ImageButton checkboxDelete;
 
 
@@ -81,6 +80,8 @@ public class CheckboxAdapter extends BaseAdapter{
         checkboxTitle.setText(currentCheckbox.getTitle());
 
         checkboxDelete = (ImageButton) view.findViewById(R.id.btnDeleteCheckbox);
+        checkboxTitle.setText(currentCheckbox.getDueDate());
+
 
         cBox =  view.findViewById(R.id.checkboxBox);
 

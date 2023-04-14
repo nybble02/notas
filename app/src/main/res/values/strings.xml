@@ -1,9 +1,13 @@
 <resources>
     <!-- app values -->
     <string name="app_name">NOTAS</string>
+    <string name="app_welcome">Welcome to Notas</string>
+    <string name="app_welcome2">The only note taking app you need!</string>
+    <string name="app_notify">Get Notified</string>
     <string name="app_notes">Notes</string>
+    <string name="app_home">Home</string>
     <string name="app_checklist">Check Lists</string>
-    <string name="app_todo">ToDo</string>
+    <string name="app_todo">Todos</string>
     <string name="app_madeBy">Made By: Nicole Jordaan</string>
     <string name="app_save">Save</string>
     <string name="app_delete">Delete</string>

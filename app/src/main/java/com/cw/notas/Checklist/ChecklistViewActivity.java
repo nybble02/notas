@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,7 +25,12 @@ import android.widget.Toast;
 import com.cw.notas.Database;
 import com.cw.notas.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -121,6 +127,7 @@ public class ChecklistViewActivity extends AppCompatActivity {
         // Get title of list from custom dialog box
         EditText etCheckboxTitle = dialogView.findViewById(R.id.checkboxTitle);
 
+
         builder.setView(dialogView)
                 .setTitle(R.string.chkbox_add_title)
                 .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
@@ -128,6 +135,9 @@ public class ChecklistViewActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
 
                         UUID uuid = UUID.randomUUID(); // Generate random unique id
+
+
+
 
                         String checkboxTitle = String.valueOf(etCheckboxTitle.getText());
                         String checkboxId = uuid.toString();

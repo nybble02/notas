@@ -10,16 +10,17 @@ public class Checkbox {
     private String listId;
     private String title;
     private String state;
-//    private Calendar dueDate;
+
+    private String dueDate;
 
     public Checkbox() {}
 
-    public Checkbox(String id, String listId, String title, String state) {
+    public Checkbox(String id, String listId, String title, String state, String dueDate) {
         this.id = id;
         this.listId = listId;
         this.title = title;
         this.state = state;
-        //this.dueDate = dueDate;
+        this.dueDate = dueDate;
     }
 
 
@@ -51,6 +52,14 @@ public class Checkbox {
 
     public String getState () {
         return this.state;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public String getDueDate () {
+        return this.dueDate;
     }
 
 
