@@ -13,6 +13,7 @@
     <string name="app_delete">Delete</string>
     <string name="app_edit">Edit</string>
     <string name="app_cancel">Cancel</string>
+    <string name="app_sure">Are you sure?</string>
     <string name="app_yes">Yes</string>
     <string name="app_no">No</string>
 
@@ -36,10 +37,21 @@
     <string name="chk_options_menu_delChkBox">Delete Selected Tasks</string>
 
     <!-- todos values -->
-    <string name="todos_btn_clear">Clear Todo Board</string>
+    <string name="todos_title_todo">To Do</string>
+    <string name="todos_title_doing">Doing</string>
+    <string name="todos_title_done">Done</string>
+    <string name="todos_btn_clear">Clear Board</string>
+    <string name="todos_btn_DeleteAll">Delete All Tasks</string>
     <string name="todos_add_task">Add Task</string>
+    <string name="todos_update_taskSuccess">Updated Task successfully!</string>
+    <string name="todos_delete_taskSuccess">Task delete successfully!</string>
+    <string name="todos_clear_boardSuccess">The Board was cleared successfully!</string>
+    <string name="todos_deleteAll_Success">All tasks were deleted successfully!</string>
     <string name="todos_menu_edit">Edit Task</string>
     <string name="todos_menu_delete">Delete Task</string>
+    <string name="todos_dialog_delete">Delete this Task?</string>
+    <string name="todos_dialog_Clear">Clear the board?</string>
+    <string name="todos_dialog_deleteAll">Delete all Items?</string>
     <string name="todos_menu_moveTodo">Move to "To Do"</string>
     <string name="todos_menu_moveDoing">Move to "Doing"</string>
     <string name="todos_menu_moveDone">Move to "Done"</string>
@@ -47,7 +59,6 @@
     <string name="todos_menu_alreadyDoing">Already on "Doing" Tab</string>
     <string name="todos_menu_alreadyDone">Already on "Done" Tab"</string>
     <string name="todos_menu_header">Select an Option</string>
-
 
 
     <!-- language values -->

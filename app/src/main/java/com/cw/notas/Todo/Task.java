@@ -1,9 +1,4 @@
-package com.cw.notas.Todos;
-
-import androidx.annotation.NonNull;
-
-import java.util.Calendar;
-import java.util.List;
+package com.cw.notas.Todo;
 
 public class Task {
     private String id;

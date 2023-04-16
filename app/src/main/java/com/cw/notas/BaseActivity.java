@@ -11,7 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.cw.notas.Checklist.ChecklistListActivity;
 import com.cw.notas.Notes.NoteListActivity;
-import com.cw.notas.Todos.TodoViewActivity;
+import com.cw.notas.Todo.TodoActivity;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -52,7 +52,7 @@ public class BaseActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.navTodos:
-                        intent = new Intent(getApplicationContext(), TodoViewActivity.class);
+                        intent = new Intent(getApplicationContext(), TodoActivity.class);
                         startActivity(intent);
                         break;
                 }

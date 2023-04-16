@@ -38,7 +38,6 @@ import java.util.UUID;
 public class ChecklistViewActivity extends AppCompatActivity {
     private Database db;
     static ArrayList<Checkbox> checkboxList = new ArrayList<Checkbox>();
-    static List<String> checkboxList_checked;
     List<String[]> checkboxDB = null;
 
     CheckboxAdapter checkboxAdapter;
@@ -179,7 +178,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
         ListView checkboxListView = (ListView)findViewById(R.id.checkboxListView);
         //ListView checkboxListView_checked = (ListView)findViewById(R.id.checkboxListView_checked);
-        Boolean isChecked = false;
 
 
         db = new Database(getApplicationContext());

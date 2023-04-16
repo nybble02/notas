@@ -15,7 +15,7 @@ import android.util.Log;
 public class Database {
 
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 29;
+    private static int DATABASE_VERSION = 30;
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
@@ -234,6 +234,17 @@ public class Database {
         db.delete("todo", "id=?", new String[]{taskId});
         db.close();
     }
+
+    public void todoDeleteBoard(String state) {
+        db.delete("todo", "state=?", new String[]{state});
+        db.close();
+    }
+
+    public void todoDeleteAll() {
+        db.delete("todo", null, null);
+        db.close();
+    }
+
 
 
     public static class OpenHelper extends SQLiteOpenHelper {
