@@ -14,21 +14,20 @@ import android.util.Log;
 
 public class Database {
 
-    // TODO: Add delete and update methods for checklist
-    // TODO: Add delete and update methods for checkbox
-
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 24;
+    private static int DATABASE_VERSION = 29;
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
     private SQLiteStatement insertChecklist;
     private SQLiteStatement insertCheckbox;
+    private SQLiteStatement insertTask;
 
 
     private static final String INSERT_NOTE = "INSERT INTO notes (id, title, content, dateCreated) VALUES (?,?,?,?)";
     private static final String INSERT_CHECKLIST = "INSERT INTO checklist (id, title) VALUES (?,?)";
     private static final String INSERT_CHECKBOX = "INSERT INTO checkbox (id, listId, title, state) VALUES (?,?,?,?)";
+    private static final String INSERT_TASK = "INSERT INTO todo (id, title, state) VALUES (?,?,?)";
     private final String SELECT_CHECKBOX = "SELECT checkbox.id, listId, checkbox.title, state FROM checkbox INNER JOIN checklist ON checkbox.listId = checklist.id WHERE checklist.id=?";
 
     public Database(Context context) {
@@ -39,6 +38,7 @@ public class Database {
         this.insertNote = Database.db.compileStatement(INSERT_NOTE);
         this.insertChecklist = Database.db.compileStatement(INSERT_CHECKLIST);
         this.insertCheckbox = Database.db.compileStatement(INSERT_CHECKBOX);
+        this.insertTask = Database.db.compileStatement(INSERT_TASK);
     }
 
     // Notes
@@ -186,6 +186,55 @@ public class Database {
     }
 
 
+    // Todos
+    public long todoInsert(String id, String title, String state) {
+        this.insertTask.bindString(1, id);
+        this.insertTask.bindString(2, title);
+        this.insertTask.bindString(3, state);
+        return this.insertTask.executeInsert();
+    }
+
+    public List<String[]> todoSelectAll() {
+        List<String[]> taskList = new ArrayList<String[]>();
+
+        Cursor cursor = db.query("todo", new String[]{"id", "title", "state"}, null, null, null, null, null);
+
+        int count = 0;
+
+        if (cursor.moveToFirst()) {
+            do {
+                String[] record = new String[]{
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                };
+
+                taskList.add(record);
+                count++;
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+        cursor.close();
+        return taskList;
+    }
+
+    public void todoUpdate(String taskId, String title, String state) {
+        ContentValues taskValues = new ContentValues();
+        taskValues.put("id", taskId);
+        taskValues.put("title", title);
+        taskValues.put("state", state); // 0 - to do | 1 - doing | 2 - done
+
+        db.update("todo", taskValues, "id=?",new String[]{taskId});
+        db.close();
+    }
+
+    public void todoDelete(String taskId) {
+        db.delete("todo", "id=?", new String[]{taskId});
+        db.close();
+    }
+
 
     public static class OpenHelper extends SQLiteOpenHelper {
         OpenHelper(Context context) {
@@ -196,6 +245,7 @@ public class Database {
             db.execSQL("CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT, content TEXT, dateCreated TEXT)");
             db.execSQL("CREATE TABLE checklist (id TEXT PRIMARY KEY, title TEXT)");
             db.execSQL("CREATE TABLE checkbox (id TEXT PRIMARY KEY, listId TEXT, title TEXT, state TEXT)");
+            db.execSQL("CREATE TABLE todo (id TEXT PRIMARY KEY, title TEXT, state TEXT)");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -203,6 +253,7 @@ public class Database {
             db.execSQL("DROP TABLE IF EXISTS notes");
             db.execSQL("DROP TABLE IF EXISTS checklist");
             db.execSQL("DROP TABLE IF EXISTS checkbox");
+            db.execSQL("DROP TABLE IF EXISTS todo");
             onCreate(db);
         }
     }

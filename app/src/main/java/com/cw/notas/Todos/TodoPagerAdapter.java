@@ -1,12 +1,15 @@
 package com.cw.notas.Todos;
 
-import androidx.annotation.NonNull;
+import android.util.Log;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import java.util.Objects;
+import com.cw.notas.Todos.Fragments.DoingFragment;
+import com.cw.notas.Todos.Fragments.DoneFragment;
+import com.cw.notas.Todos.Fragments.TodoFragment;
 
 public class TodoPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -17,22 +20,49 @@ public class TodoPagerAdapter extends FragmentStatePagerAdapter {
         this.numOfTabs = numOfTabs;
     }
 
-    @NonNull
     @Override
     public Fragment getItem(int position) {
+
+        Fragment tabFragment = null;
+
         switch (position) {
             case 0:
-                TodoFragment todoTab = new TodoFragment();
-                return todoTab;
+                tabFragment = new TodoFragment();
+                Log.d("frag", String.valueOf(position));
+                return tabFragment;
             case 1:
-                DoingFragment doingTab = new DoingFragment();
-                return doingTab;
+                tabFragment = new DoingFragment();
+                Log.d("frag", String.valueOf(position));
+                return tabFragment;
             case 2:
-                DoneFragment doneTab = new DoneFragment();
-                return doneTab;
+                tabFragment = new DoneFragment();
+                Log.d("frag", String.valueOf(position));
+
+                return tabFragment;
             default:
                 return null;
         }
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+
+        String title = "";
+
+        switch (position) {
+            case 0:
+                return title = "To Do";
+            case 1:
+                return title = "Doing";
+            case 2:
+                return title = "Done";
+            default:
+                return null;
+        }
+
+
+       // return super.getPageTitle(position);
     }
 
     @Override

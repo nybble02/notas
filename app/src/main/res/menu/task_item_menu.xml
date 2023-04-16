@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/todo" android:title="@string/todos_menu_moveTodo" />
+    <item android:id="@+id/doing" android:title="@string/todos_menu_moveDoing"/>
+    <item android:id="@+id/done" android:title="@string/todos_menu_moveDone" />
+    <item android:id="@+id/edit" android:title="@string/app_edit" />
+    <item android:id="@+id/delete" android:title="@string/app_delete" />
+</menu>

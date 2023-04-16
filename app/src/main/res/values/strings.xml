@@ -11,6 +11,7 @@
     <string name="app_madeBy">Made By: Nicole Jordaan</string>
     <string name="app_save">Save</string>
     <string name="app_delete">Delete</string>
+    <string name="app_edit">Edit</string>
     <string name="app_cancel">Cancel</string>
     <string name="app_yes">Yes</string>
     <string name="app_no">No</string>
@@ -33,6 +34,20 @@
     <string name="chk_options_menu_delete">Delete List</string>
     <string name="chk_options_menu_addChkBox">Add Task</string>
     <string name="chk_options_menu_delChkBox">Delete Selected Tasks</string>
+
+    <!-- todos values -->
+    <string name="todos_btn_clear">Clear Todo Board</string>
+    <string name="todos_add_task">Add Task</string>
+    <string name="todos_menu_edit">Edit Task</string>
+    <string name="todos_menu_delete">Delete Task</string>
+    <string name="todos_menu_moveTodo">Move to "To Do"</string>
+    <string name="todos_menu_moveDoing">Move to "Doing"</string>
+    <string name="todos_menu_moveDone">Move to "Done"</string>
+    <string name="todos_menu_alreadyTodo">Already on "To do" Tab</string>
+    <string name="todos_menu_alreadyDoing">Already on "Doing" Tab</string>
+    <string name="todos_menu_alreadyDone">Already on "Done" Tab"</string>
+    <string name="todos_menu_header">Select an Option</string>
+
 
 
     <!-- language values -->

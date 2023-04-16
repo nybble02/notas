@@ -42,7 +42,9 @@ public class ChecklistViewActivity extends AppCompatActivity {
     List<String[]> checkboxDB = null;
 
     CheckboxAdapter checkboxAdapter;
-
+    TextView pgTitle;
+    Intent intent;
+    String listId;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -68,9 +70,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
         }
         return false;
     }
-    TextView pgTitle;
-    Intent intent;
-    String listId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,9 +92,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -104,7 +100,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
         populateCheckboxList(listId);
     }
 
-    // Gets
    private BroadcastReceiver  cBoxDelete = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -135,9 +130,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
 
                         UUID uuid = UUID.randomUUID(); // Generate random unique id
-
-
-
 
                         String checkboxTitle = String.valueOf(etCheckboxTitle.getText());
                         String checkboxId = uuid.toString();

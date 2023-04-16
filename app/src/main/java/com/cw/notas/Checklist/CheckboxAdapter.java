@@ -32,11 +32,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class CheckboxAdapter extends BaseAdapter{
-    protected Database db;
-    protected Context context;
-    protected ArrayList<Checkbox> checkboxes;
-    public Boolean[] checkedHolder;
-    protected LayoutInflater inflater;
+    private Database db;
+    private Context context;
+    private ArrayList<Checkbox> checkboxes;
+    private LayoutInflater inflater;
     CheckBox cBox;
     TextView checkboxTitle;
     ImageButton checkboxDelete;
@@ -80,19 +79,15 @@ public class CheckboxAdapter extends BaseAdapter{
         checkboxTitle.setText(currentCheckbox.getTitle());
 
         checkboxDelete = (ImageButton) view.findViewById(R.id.btnDeleteCheckbox);
-        checkboxTitle.setText(currentCheckbox.getDueDate());
+        //checkboxTitle.setText(currentCheckbox.getDueDate());
 
 
         cBox =  view.findViewById(R.id.checkboxBox);
 
         if(Objects.equals(currentCheckbox.getState(), "1")) {
             cBox.setChecked(true);
-            //   Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
-
         } else {
             cBox.setChecked(false);
-   //        Toast.makeText(context.getApplicationContext(), String.valueOf(currentCheckbox.getState()), Toast.LENGTH_SHORT).show();
-
         }
 
         checkboxDelete.setOnClickListener(new View.OnClickListener() {
