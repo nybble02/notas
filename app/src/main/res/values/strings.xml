@@ -40,9 +40,12 @@
     <string name="todos_title_todo">To Do</string>
     <string name="todos_title_doing">Doing</string>
     <string name="todos_title_done">Done</string>
+    <string name="todos_title_dueDate">Set a event in your calendar: </string>
     <string name="todos_btn_clear">Clear Board</string>
     <string name="todos_btn_DeleteAll">Delete All Tasks</string>
     <string name="todos_add_task">Add Task</string>
+    <string name="todos_add_taskDate">Set a due date </string>
+    <string name="todos_add_taskTime">Set a reminder time </string>
     <string name="todos_update_taskSuccess">Updated Task successfully!</string>
     <string name="todos_delete_taskSuccess">Task delete successfully!</string>
     <string name="todos_clear_boardSuccess">The Board was cleared successfully!</string>

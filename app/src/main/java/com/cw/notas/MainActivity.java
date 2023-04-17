@@ -5,15 +5,29 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.provider.CalendarContract;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,32 +40,93 @@ import com.cw.notas.Checklist.ChecklistViewActivity;
 import com.cw.notas.Notes.NoteListActivity;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import android.Manifest;
+
 public class MainActivity extends BaseActivity {
 
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public NavigationView navDrawer;
+    Context context;
+    Resources resources;
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.language_menu, menu);
         return true;
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+        String langCode = "en";
+        switch (item.getItemId()) {
+            case R.id.lang_en:
+                langCode = "en";
+                break;
+            case R.id.lang_fr:
+                langCode = "fr";
+                break;
+            case R.id.lang_it:
+                langCode = "it";
+                break;
+            case R.id.lang_ru:
+                langCode = "ru";
+                break;
+            case R.id.lang_jp:
+                langCode = "jp";
+                break;
+        }
+        return false;
+    }
+
+    private ContentResolver contentResolver;
+    private long eventId;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         onCreateDrawer();
-
-
-
-
         Button btnNotify = findViewById(R.id.btnNotify);
 
+        final int REQUEST_PERMISSIONS = 100;
+
+        //long calendarId = CalendarManager.addCalendar(getContentResolver());
 
 
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR}, REQUEST_PERMISSIONS);
+        } else {
+
+
+          /* long calId =  CalendarHelper.getCalendarId(MainActivity.this);
+
+         // Set the start and end time of the event
+            long startTime = System.currentTimeMillis();
+            long endTime = startTime + 3600000; // 1 hour
+            String title = "notas test?";
+            String description = "tes test test";
+
+            CalendarHelper.setEvent(MainActivity.this, title,description, startTime, endTime, calId); */
+
+
+
+
+
+
+
+
+        }
     }
 
 
@@ -59,3 +134,10 @@ public class MainActivity extends BaseActivity {
 
 
 }
+
+
+
+
+
+
+

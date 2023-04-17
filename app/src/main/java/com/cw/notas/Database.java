@@ -15,7 +15,7 @@ import android.util.Log;
 public class Database {
 
     private static final String DATABASE_NAME = "notas.db";
-    private static int DATABASE_VERSION = 30;
+    private static int DATABASE_VERSION = 31;
     private static Context context;
     static SQLiteDatabase db;
     private SQLiteStatement insertNote;
@@ -27,7 +27,7 @@ public class Database {
     private static final String INSERT_NOTE = "INSERT INTO notes (id, title, content, dateCreated) VALUES (?,?,?,?)";
     private static final String INSERT_CHECKLIST = "INSERT INTO checklist (id, title) VALUES (?,?)";
     private static final String INSERT_CHECKBOX = "INSERT INTO checkbox (id, listId, title, state) VALUES (?,?,?,?)";
-    private static final String INSERT_TASK = "INSERT INTO todo (id, title, state) VALUES (?,?,?)";
+    private static final String INSERT_TASK = "INSERT INTO todo (id, title, state, time) VALUES (?,?,?,?)";
     private final String SELECT_CHECKBOX = "SELECT checkbox.id, listId, checkbox.title, state FROM checkbox INNER JOIN checklist ON checkbox.listId = checklist.id WHERE checklist.id=?";
 
     public Database(Context context) {
@@ -187,17 +187,18 @@ public class Database {
 
 
     // Todos
-    public long todoInsert(String id, String title, String state) {
+    public long todoInsert(String id, String title, String state, long time) {
         this.insertTask.bindString(1, id);
         this.insertTask.bindString(2, title);
         this.insertTask.bindString(3, state);
+        this.insertTask.bindString(4, String.valueOf(time));
         return this.insertTask.executeInsert();
     }
 
     public List<String[]> todoSelectAll() {
         List<String[]> taskList = new ArrayList<String[]>();
 
-        Cursor cursor = db.query("todo", new String[]{"id", "title", "state"}, null, null, null, null, null);
+        Cursor cursor = db.query("todo", new String[]{"id", "title", "state", "time"}, null, null, null, null, null);
 
         int count = 0;
 
@@ -207,6 +208,7 @@ public class Database {
                         cursor.getString(0),
                         cursor.getString(1),
                         cursor.getString(2),
+                        cursor.getString(3),
                 };
 
                 taskList.add(record);
@@ -220,11 +222,12 @@ public class Database {
         return taskList;
     }
 
-    public void todoUpdate(String taskId, String title, String state) {
+    public void todoUpdate(String taskId, String title, String state, long time) {
         ContentValues taskValues = new ContentValues();
         taskValues.put("id", taskId);
         taskValues.put("title", title);
         taskValues.put("state", state); // 0 - to do | 1 - doing | 2 - done
+        taskValues.put("time", time);
 
         db.update("todo", taskValues, "id=?",new String[]{taskId});
         db.close();
@@ -256,7 +259,7 @@ public class Database {
             db.execSQL("CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT, content TEXT, dateCreated TEXT)");
             db.execSQL("CREATE TABLE checklist (id TEXT PRIMARY KEY, title TEXT)");
             db.execSQL("CREATE TABLE checkbox (id TEXT PRIMARY KEY, listId TEXT, title TEXT, state TEXT)");
-            db.execSQL("CREATE TABLE todo (id TEXT PRIMARY KEY, title TEXT, state TEXT)");
+            db.execSQL("CREATE TABLE todo (id TEXT PRIMARY KEY, title TEXT, state TEXT, time INTEGER)");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

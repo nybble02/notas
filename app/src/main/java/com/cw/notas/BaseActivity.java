@@ -1,6 +1,8 @@
 package com.cw.notas;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.MenuItem;
 
@@ -78,5 +80,9 @@ public class BaseActivity extends AppCompatActivity {
            super.onBackPressed();
        }
     }
+
+
+
+
 
 }

@@ -128,7 +128,8 @@ public class TodoActivity extends BaseActivity {
         switch (item.getItemId())
         {
             case R.id.option_add:
-                openDialog();
+                intent = new Intent(getApplicationContext(), AddTaskActivity.class);
+                startActivity(intent);
                 break;
             case R.id.option_delete_items:
                 deleteAll();
@@ -140,36 +141,6 @@ public class TodoActivity extends BaseActivity {
         return false;
     }
 
-    private void openDialog() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(TodoActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-
-        // Set view to show custom dialog
-        View dialogView = inflater.inflate(R.layout.dialog_add_task, null);
-        // Get title of list from custom dialog box
-        EditText etTaskTitle = dialogView.findViewById(R.id.taskTitle);
-
-
-        builder.setView(dialogView)
-                .setTitle(R.string.todos_add_task)
-                .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        UUID uuid = UUID.randomUUID(); // Generate random unique id
-
-                        String taskTitle = String.valueOf(etTaskTitle.getText());
-                        String taskId = uuid.toString();
-
-                        db = new Database(getApplicationContext());
-                        db.todoInsert(taskId, taskTitle,"0");
-
-                        onDialogBoxClose();
-                    }
-                }).setNegativeButton(R.string.app_cancel, null).show();
-
-    }
 
     private void onDialogBoxClose(){
         removeTaskList();
@@ -187,6 +158,7 @@ public class TodoActivity extends BaseActivity {
             taskObj.setId(task[0]);
             taskObj.setTitle(task[1]);
             taskObj.setState(task[2]);
+            taskObj.setDate(Long.parseLong(task[3]));
 
             if (Objects.equals(taskObj.getState(), "0")) {
                 taskList.add(taskObj);
@@ -204,7 +176,7 @@ public class TodoActivity extends BaseActivity {
 
     private void updateTaskState(Task task, String state) {
         db = new Database(TodoActivity.this);
-        db.todoUpdate(task.getId(),task.getTitle(), state);
+        //db.todoUpdate(task.getId(),task.getTitle(), state);
 
         removeTaskList();
         populateTaskList();
@@ -264,5 +236,12 @@ public class TodoActivity extends BaseActivity {
                     }
                 }).setNegativeButton(R.string.app_no, null).show();
 
+    }
+
+    // Stop the animation
+    @Override
+    public void recreate() {
+        super.recreate();
+        overridePendingTransition(0, 0); // prevents transition animation when recreating activity
     }
 }

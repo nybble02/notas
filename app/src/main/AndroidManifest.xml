@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Notas"
         tools:targetApi="31">
         <activity
+            android:name=".Todo.AddTaskActivity"
+            android:exported="false" />
+        <activity
             android:name=".Todo.DoneActivity"
             android:exported="false" />
         <activity
@@ -24,9 +27,6 @@
             android:exported="false" />
         <activity
             android:name=".Todo.TodoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Todos.TodoViewActivity"
             android:exported="false" />
         <activity
             android:name=".Checklist.ChecklistViewActivity"

@@ -1,21 +1,14 @@
 package com.cw.notas.Notes;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.cw.notas.BaseActivity;
 import com.cw.notas.Database;
-import com.cw.notas.MainActivity;
-import com.cw.notas.Notes.Note;
-import com.cw.notas.Notes.NoteAddActivity;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
@@ -36,15 +29,14 @@ public class NoteListActivity extends BaseActivity {
 
         View btnAddNewNote = findViewById(R.id.btnAddNewNote);
 
-         btnAddNewNote.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 Intent intent = new Intent(getApplicationContext(), NoteAddActivity.class);
-                 startActivity(intent);
+        btnAddNewNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), NoteAddActivity.class);
+                startActivity(intent);
 
-             }
-         });
-
+            }
+        });
     }
 
     @Override
@@ -69,7 +61,7 @@ public class NoteListActivity extends BaseActivity {
         adapter = new ArrayAdapter<Note>(this, android.R.layout.simple_list_item_1, noteList);
         adapter.notifyDataSetChanged();
 
-        ListView noteListView = (ListView)findViewById(R.id.noteList);
+        ListView noteListView = (ListView) findViewById(R.id.noteList);
         noteListView.setAdapter(adapter);
 
         // TODO: LongClick Listener - delete
@@ -83,7 +75,6 @@ public class NoteListActivity extends BaseActivity {
             }
         });
 
-
     }
 
     @Override
@@ -92,6 +83,5 @@ public class NoteListActivity extends BaseActivity {
         noteList.removeAll(noteList);
         adapter.notifyDataSetChanged();
     }
-
 
 }

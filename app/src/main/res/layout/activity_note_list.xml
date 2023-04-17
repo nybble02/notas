@@ -22,7 +22,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1"
-                android:text="Notes"
+                android:text="@string/app_notes"
                 android:textSize="34sp" />
 
             <Button
@@ -32,7 +32,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:text="Add New Note" />
+                android:text="@string/notes_btn_addNote" />
         </LinearLayout>
 
         <LinearLayout

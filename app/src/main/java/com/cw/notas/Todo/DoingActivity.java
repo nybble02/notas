@@ -160,7 +160,7 @@ public class DoingActivity extends BaseActivity {
                         String taskId = uuid.toString();
 
                         db = new Database(getApplicationContext());
-                        db.todoInsert(taskId, taskTitle,"0");
+                     //   db.todoInsert(taskId, taskTitle,"0");
 
                         onDialogBoxClose();
                     }
@@ -201,7 +201,7 @@ public class DoingActivity extends BaseActivity {
 
     private void updateTaskState(Task task, String state) {
         db = new Database(DoingActivity.this);
-        db.todoUpdate(task.getId(),task.getTitle(), state);
+      //  db.todoUpdate(task.getId(),task.getTitle(), state);
 
         removeTaskList();
         populateTaskList();
@@ -262,5 +262,12 @@ public class DoingActivity extends BaseActivity {
                     }
                 }).setNegativeButton(R.string.app_no, null).show();
 
+    }
+
+    // Stop the animation
+    @Override
+    public void recreate() {
+        super.recreate();
+        overridePendingTransition(0, 0); // prevents transition animation when recreating activity
     }
 }

@@ -1,18 +1,23 @@
 package com.cw.notas.Todo;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class Task {
     private String id;
     private String title;
     private String state;
 
-    private String dueDate;
+    private long date;
 
     public Task() {}
 
-    public Task(String id, String listId, String title, String state, String dueDate) {
+    public Task(String id, String listId, String title, String state, long date) {
         this.id = id;
         this.title = title;
         this.state = state;
+        this.date = date;
     }
 
     public void setId(String id) {this.id = id;
@@ -37,9 +42,17 @@ public class Task {
         return this.state;
     }
 
+    public void setDate(long date) {
+        this.date = date;
+    }
+    public long getDate () {
+        return this.date;
+    }
+
 
     @Override
     public String toString() {
+
         return title;
     }
 }
