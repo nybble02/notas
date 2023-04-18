@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cw.notas.Database;
+import com.cw.notas.Notes.NoteAddActivity;
 import com.cw.notas.R;
 
 import java.text.DateFormat;
@@ -133,10 +134,16 @@ public class ChecklistViewActivity extends AppCompatActivity {
                         String checkboxTitle = String.valueOf(etCheckboxTitle.getText());
                         String checkboxId = uuid.toString();
 
-                        db = new Database(getApplicationContext());
-                        db.checkboxInsert(checkboxId, listId, checkboxTitle,"0");
+                        if(checkboxTitle.isEmpty()) {
+                            Toast.makeText(ChecklistViewActivity.this,  R.string.chk_error, Toast.LENGTH_SHORT).show();
 
-                        onDialogBoxClose(listId);
+                        } else {
+                            db = new Database(getApplicationContext());
+                            db.checkboxInsert(checkboxId, listId, checkboxTitle, "0");
+                            Toast.makeText(ChecklistViewActivity.this, R.string.chk_successCreated, Toast.LENGTH_SHORT).show();
+
+                            onDialogBoxClose(listId);
+                        }
 
                     }
                 }).setNegativeButton(R.string.app_cancel, null).show();
@@ -152,19 +159,19 @@ public class ChecklistViewActivity extends AppCompatActivity {
     private void onDeleteList(String listId) {
         new android.app.AlertDialog.Builder(ChecklistViewActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Are you sure?")
-                .setMessage("Delete this list?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setTitle(R.string.app_sure)
+                .setMessage(R.string.chk_dialog_delete)
+                .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         db = new Database(getApplicationContext());
                         db.checklistDelete(listId);
-                        Toast.makeText(ChecklistViewActivity.this, "Checklist successfully deleted!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChecklistViewActivity.this, R.string.chkList_successDeleted, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ChecklistListActivity.class);
                         startActivity(intent);
                     }
 
-                }).setNegativeButton("No", null).show();
+                }).setNegativeButton(R.string.app_cancel, null).show();
     }
 
 
@@ -197,13 +204,7 @@ public class ChecklistViewActivity extends AppCompatActivity {
         checkboxListView.setAdapter(checkboxAdapter);
         checkboxAdapter.notifyDataSetChanged();
 
-        checkboxListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(ChecklistViewActivity.this, checkboxList.get(i).getTitle() + " " + checkboxList.get(i).getState(), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+
 
 
     }

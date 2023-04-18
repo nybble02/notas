@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NOTES</string>
+    <string name="app_welcome">Bienvenue sur Notas</string>
+    <string name="app_welcome2">L\'unique application de prise de notes dont vous avez besoin !</string>
+    <string name="app_notify">Recevoir des notifications</string>
+    <string name="app_notes">Notes</string>
+    <string name="app_home">Accueil</string>
+    <string name="app_checklist">Listes de contrôle</string>
+    <string name="app_todo">Tâches à faire</string>
+    <string name="app_madeBy">Créé par : Nicole Jordaan</string>
+    <string name="app_save">Enregistrer</string>
+    <string name="app_delete">Supprimer</string>
+    <string name="app_edit">Modifier</string>
+    <string name="app_cancel">Annuler</string>
+    <string name="app_sure">Êtes-vous sûr(e) ?</string>
+    <string name="app_yes">Oui</string>
+    <string name="app_no">Non</string>
+
+    <string name="notes_btn_addNote">Ajouter une nouvelle note</string>
+    <string name="notes_btn_editNote">Modifier la note</string>
+    <string name="notes_emptyList">Aucune note créée...</string>
+    <string name="notes_hint_title">Titre</string>
+    <string name="notes_hint_content">Votre note...</string>
+    <string name="notes_error">Veuillez saisir un titre de note</string>
+    <string name="notes_success">Note mise à jour avec succès</string>
+    <string name="notes_successDelete">Note supprimée avec succès</string>
+    <string name="notes_successCreated">Note créée avec succès</string>
+    <string name="notes_delete">Supprimer cette note ?</string>
+
+    <string name="chkList_btn_addChk">Ajouter une liste de contrôle</string>
+    <string name="chkList_btn_editChk">Modifier la liste de contrôle</string>
+    <string name="chkList_input_listName">Entrez le nom de votre liste...</string>
+    <string name="chkList_create_list">Créer une nouvelle liste</string>
+    <string name="chkList_error">Veuillez saisir un titre pour la liste de contrôle</string>
+    <string name="chkList_successCreated">Liste créée avec succès !</string>
+    <string name="chkList_successDeleted">Liste supprimée avec succès !</string>
+
+    <string name="chkbox_add_title">Ajouter une case à cocher</string>
+    <string name="chkbox_input_listName">Entrez le nom de votre tâche...</string>
+    <string name="chk_options_menu_delete">Supprimer la liste</string>
+    <string name="chk_dialog_delete">Supprimer la liste ?</string>
+    <string name="chk_options_menu_addChkBox">Ajouter une case à cocher</string>
+    <string name="chk_options_menu_delChkBox">Supprimer les tâches sélectionnées</string>
+    <string name="chk_error">Veuillez saisir un titre pour la case à cocher</string>
+    <string name="chk_successCreated">Case à cocher créée avec succès</string>
+
+    <string name="todos_error">Veuillez saisir un titre de tâche</string>
+    <string name="todos_title_todo">À faire</string>
+    <string name="todos_title_doing">En cours</string>
+    <string name="todos_title_done">Terminé</string>
+    <string name="todos_title_dueDate">Définir un événement dans votre calendrier : </string>
+    <string name="todos_btn_clear">Effacer le tableau</string>
+    <string name="todos_btn_DeleteAll">Supprimer toutes les tâches</string>
+    <string name="todos_add_task">Ajouter une tâche</string>
+    <string name="todos_add_taskDate">Définir une date d\'échéance </string>
+    <string name="todos_add_taskTime">Définir une heure de rappel </string>
+    <string name="todos_update_taskSuccess">Tâche mise à jour avec succès !</string>
+    <string name="todos_delete_taskSuccess">Tâche supprimée avec succès !</string>
+    <string name="todos_clear_boardSuccess">Le tableau a été effacé avec succès !</string>
+    <string name="todos_deleteAll_Success">Toutes les tâches ont été supprimées avec succès !</string>
+    <string name="todos_menu_edit">Modifier la tâche</string>
+    <string name="todos_menu_add">Ajouter une tâche</string>
+    <string name="todos_menu_delete">Supprimer la tâche</string>
+    <string name="todos_dialog_delete">Supprimer cette tâche ?</string>
+    <string name="todos_dialog_Clear">Effacer le tableau ?</string>
+    <string name="todos_dialog_deleteAll">Supprimer tous les éléments ?</string>
+    <string name="todos_menu_moveTodo">Déplacer vers "À faire"</string>
+    <string name="todos_menu_moveDoing">Déplacer vers "En cours"</string>
+    <string name="todos_menu_moveDone">Déplacer vers "Terminé"</string>
+    <string name="todos_menu_alreadyTodo">Déjà sur l\'onglet "À faire"</string>
+    <string name="todos_menu_alreadyDoing">Déjà sur l\'onglet "En cours"</string>
+    <string name="todos_menu_alreadyDone">Déjà sur l\'onglet "Terminé"</string>
+    <string name="todos_menu_header">Sélectionnez une option</string>
+    <string name="todos_add_editTask">Modifier la tâche</string>
+    <string name="todos_add_dueDateError">Saisissez un titre, une date d\'échéance et une heure de rappel</string>
+
+    <string name="lang_menu_en">Anglais</string>
+    <string name="lang_menu_fr">Français</string>
+    <string name="lang_menu_gr">Allemand</string>
+    <string name="lang_menu_it">Italien</string>
+    <string name="lang_menu_ru">Russe</string>
+    <string name="lang_menu_jp">Japonais</string>
+    <string name="lang_menu_ch">Chinois</string>
+    <string name="nav_open">Ouvrir</string>
+    <string name="nav_close">Fermer</string>
+</resources>

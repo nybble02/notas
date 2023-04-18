@@ -11,11 +11,12 @@
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="99dp"
+            android:layout_marginTop="125dp"
             android:layout_marginBottom="668dp"
-            android:layout_marginTop="150dp"
             android:text="@string/app_welcome"
             android:textAlignment="center"
             android:textSize="34sp" />
@@ -23,20 +24,11 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:text="@string/app_welcome2" />
-
-        <Button
-            android:id="@+id/btnNotify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="144dp"
             android:layout_marginTop="250dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/app_notify"
-            app:icon="@android:drawable/ic_popup_reminder" />
+            android:text="@string/app_welcome2"
+            android:textAlignment="center"
+            android:textSize="20dp" />
 
 
     </FrameLayout>

@@ -24,6 +24,10 @@
     <string name="notes_hint_title">Title</string>
     <string name="notes_hint_content">Your note…</string>
     <string name="notes_error">Please enter a note title</string>
+    <string name="notes_success">Note successfully Updated</string>
+    <string name="notes_successDelete">Note successfully Updated</string>
+    <string name="notes_successCreated">Note successfully Created</string>
+    <string name="notes_delete">Delete this note?</string>
 
     <!-- checklist values -->
     <string name="chkList_btn_addChk">Add Checklist</string>
@@ -31,16 +35,19 @@
     <string name="chkList_input_listName">Enter your list name…</string>
     <string name="chkList_create_list">Create new List</string>
     <string name="chkList_error">Please enter a checklist title</string>
+    <string name="chkList_successCreated">List successfully created!</string>
+    <string name="chkList_successDeleted">List successfully deleted!</string>
 
     <string name="chkbox_add_title">Add Checkbox</string>
     <string name="chkbox_input_listName">Enter your task name…</string>
     <string name="chk_options_menu_delete">Delete List</string>
-    <string name="chk_options_menu_addChkBox">Add Task</string>
-    <string name="chk_options_menu_delChkBox">Delete Selected Tasks</string>
+    <string name="chk_dialog_delete">Delete List?</string>
+    <string name="chk_options_menu_addChkBox">Add Checkbox</string>
+    <string name="chk_options_menu_delChkBox">Delete checkbox?</string>
     <string name="chk_error">Please enter a checkbox title </string>
+    <string name="chk_successCreated">Checkbox successfully created </string>
 
     <!-- todos values -->
-
     <string name="todos_error">Please enter a task title</string>
     <string name="todos_title_todo">To Do</string>
     <string name="todos_title_doing">Doing</string>
@@ -56,6 +63,7 @@
     <string name="todos_clear_boardSuccess">The Board was cleared successfully!</string>
     <string name="todos_deleteAll_Success">All tasks were deleted successfully!</string>
     <string name="todos_menu_edit">Edit Task</string>
+    <string name="todos_menu_add">Add Task</string>
     <string name="todos_menu_delete">Delete Task</string>
     <string name="todos_dialog_delete">Delete this Task?</string>
     <string name="todos_dialog_Clear">Clear the board?</string>
@@ -68,6 +76,7 @@
     <string name="todos_menu_alreadyDone">Already on "Done" Tab"</string>
     <string name="todos_menu_header">Select an Option</string>
     <string name="todos_add_editTask">Edit task</string>
+    <string name="todos_add_dueDateError">Enter a title, due date and reminder time</string>
 
 
     <!-- language values -->

@@ -59,7 +59,7 @@ public class NoteAddActivity extends AppCompatActivity {
 
                     db = new Database(getApplicationContext());
                     db.noteUpdate(noteId,String.valueOf(noteTitle.getText()),String.valueOf(noteContent.getText()),formattedTime);
-                    Toast.makeText(NoteAddActivity.this, "Note successfully Updated!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NoteAddActivity.this, R.string.notes_success, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
                     startActivity(intent);
                 }
@@ -70,19 +70,19 @@ public class NoteAddActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     new AlertDialog.Builder(NoteAddActivity.this)
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setTitle("Are you sure?")
-                            .setMessage("Delete this note?")
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            .setTitle(R.string.app_sure)
+                            .setMessage(R.string.notes_delete)
+                            .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     db = new Database(getApplicationContext());
                                     db.noteDelete(noteId);
-                                    Toast.makeText(NoteAddActivity.this, "Note successfully deleted!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(NoteAddActivity.this, R.string.notes_successDelete, Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
                                     startActivity(intent);
                                 }
 
-                            }).setNegativeButton("No", null).show();
+                            }).setNegativeButton(R.string.app_cancel, null).show();
                 }
             });
 
@@ -96,7 +96,7 @@ public class NoteAddActivity extends AppCompatActivity {
                     String noteTitleStr = noteTitle.getText().toString().trim();
 
                     if(noteTitleStr.isEmpty()) {
-                        Toast.makeText(NoteAddActivity.this, "", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NoteAddActivity.this, R.string.notes_error, Toast.LENGTH_SHORT).show();
 
                     } else {
                         LocalDateTime dateTime = LocalDateTime.now();
@@ -109,7 +109,7 @@ public class NoteAddActivity extends AppCompatActivity {
                         db = new Database(getApplicationContext());
                         db.noteInsert(noteId,String.valueOf(noteTitle.getText()),String.valueOf(noteContent.getText()),formattedTime);
 
-                        Toast.makeText(NoteAddActivity.this, "Note successfully created!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(NoteAddActivity.this, R.string.notes_successCreated, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
                         startActivity(intent);

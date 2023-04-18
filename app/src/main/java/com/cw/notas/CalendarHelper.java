@@ -1,5 +1,6 @@
 package com.cw.notas;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,7 +18,6 @@ public class CalendarHelper {
                 CalendarContract.Calendars._ID,
                 CalendarContract.Calendars.CALENDAR_DISPLAY_NAME
         };
-
         Cursor calCursor = context.getContentResolver().query(
                 CalendarContract.Calendars.CONTENT_URI,
                 projection,
@@ -25,7 +25,6 @@ public class CalendarHelper {
                 null,
                 CalendarContract.Calendars._ID + " ASC"
         );
-
         if (calCursor != null && calCursor.getCount() <= 0) {
             calCursor.close();
             calCursor = context.getContentResolver().query(
@@ -36,7 +35,6 @@ public class CalendarHelper {
                     CalendarContract.Calendars._ID + " ASC"
             );
         }
-
         if (calCursor != null) {
             if (calCursor.moveToFirst()) {
                 String calName;
@@ -72,10 +70,10 @@ public class CalendarHelper {
         ContentResolver cr = context.getContentResolver();
         Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
 
-// Retrieve the ID of the new event
+        // Retrieve the ID of the new event
         long eventID = Long.parseLong(uri.getLastPathSegment());
 
-// Add a reminder for the event
+        // Add a reminder for the event
         ContentValues reminderValues = new ContentValues();
         reminderValues.put(CalendarContract.Reminders.MINUTES, 15);
         reminderValues.put(CalendarContract.Reminders.EVENT_ID, eventID);

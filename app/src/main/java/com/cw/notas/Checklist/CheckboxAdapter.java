@@ -95,9 +95,9 @@ public class CheckboxAdapter extends BaseAdapter{
             public void onClick(View view) {
                 new AlertDialog.Builder(context)
                         .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Are you sure?")
-                        .setMessage("Delete this task?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.app_sure)
+                        .setMessage(R.string.chk_options_menu_delChkBox)
+                        .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 db = new Database(context.getApplicationContext());
@@ -107,7 +107,7 @@ public class CheckboxAdapter extends BaseAdapter{
                                 context.sendBroadcast(intent);
 
                             }
-                        }).setNegativeButton("No", null).show();
+                        }).setNegativeButton(R.string.app_cancel, null).show();
 
 
             }

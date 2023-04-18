@@ -51,11 +51,6 @@ public class MainActivity extends BaseActivity {
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
     public NavigationView navDrawer;
-    Context context;
-    Resources resources;
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,52 +83,21 @@ public class MainActivity extends BaseActivity {
         return false;
     }
 
-    private ContentResolver contentResolver;
-    private long eventId;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onCreateDrawer();
-        Button btnNotify = findViewById(R.id.btnNotify);
-
-        final int REQUEST_PERMISSIONS = 100;
-
-        //long calendarId = CalendarManager.addCalendar(getContentResolver());
-
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR}, REQUEST_PERMISSIONS);
-        } else {
-
-
-          /* long calId =  CalendarHelper.getCalendarId(MainActivity.this);
-
-         // Set the start and end time of the event
-            long startTime = System.currentTimeMillis();
-            long endTime = startTime + 3600000; // 1 hour
-            String title = "notas test?";
-            String description = "tes test test";
-
-            CalendarHelper.setEvent(MainActivity.this, title,description, startTime, endTime, calId); */
 
 
 
-
-
-
-
-
-        }
     }
-
-
-
-
-
 }
+
+
+
+
+
 
 
 

@@ -67,12 +67,14 @@ public class ChecklistListActivity extends BaseActivity {
                         String listTitle = String.valueOf(etListTitle.getText());
                         String listId = uuid.toString();
 
-                        db = new Database(getApplicationContext());
-                        db.checklistInsert(listId, listTitle);
-
-                        Toast.makeText(ChecklistListActivity.this, "List successfully created!", Toast.LENGTH_SHORT).show();
-
-                        dialogBoxOnClose();
+                        if(listTitle.isEmpty()) {
+                            Toast.makeText(ChecklistListActivity.this,  R.string.chkList_error, Toast.LENGTH_SHORT).show();
+                        } else {
+                            db = new Database(getApplicationContext());
+                            db.checklistInsert(listId, listTitle);
+                            Toast.makeText(ChecklistListActivity.this, R.string.chkList_successCreated, Toast.LENGTH_SHORT).show();
+                            dialogBoxOnClose();
+                        }
                     }
                 }).setNegativeButton(R.string.app_cancel, null).show();
             }

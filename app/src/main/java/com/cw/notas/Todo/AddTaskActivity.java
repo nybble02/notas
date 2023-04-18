@@ -1,10 +1,15 @@
 package com.cw.notas.Todo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +33,8 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private Database db;
     Calendar calendar;
+    final int REQUEST_PERMISSIONS = 100;
+    String taskTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,26 +102,34 @@ public class AddTaskActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
 
-              String taskTitle = etTaskTitle.getText().toString().trim();
+              taskTitle = etTaskTitle.getText().toString().trim();
 
             if (taskTitle.isEmpty()) {
-                Toast.makeText(AddTaskActivity.this, "Enter a title, due date and reminder time", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddTaskActivity.this, R.string.todos_add_dueDateError, Toast.LENGTH_SHORT).show();
             }
             else {
                 UUID uuid = UUID.randomUUID(); // Generate random unique id
                 String taskId = uuid.toString();
 
-                long startTime = calendar.getTimeInMillis();
-                long endTime = startTime + 3600000; // 1 hour
-                long calId =  CalendarHelper.getCalendarId(AddTaskActivity.this);
-                CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle),"", startTime, endTime, calId);
+                if (ContextCompat.checkSelfPermission(AddTaskActivity.this, Manifest.permission.READ_CALENDAR) == PackageManager.PERMISSION_GRANTED
+                        && ContextCompat.checkSelfPermission(AddTaskActivity.this, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
+                    // Permissions granted, proceed with event creation
+                    long startTime = calendar.getTimeInMillis();
+                    long endTime = startTime + 3600000; // 1 hour
+                    long calId = CalendarHelper.getCalendarId(AddTaskActivity.this);
+                    CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle), "", startTime, endTime, calId);
 
-                db = new Database(getApplicationContext());
-                db.todoInsert(taskId, String.valueOf(taskTitle),"0");
+                    db = new Database(getApplicationContext());
+                    db.todoInsert(taskId, String.valueOf(taskTitle), "0");
+
+                    Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
+                    startActivity(intent);
+                } else {
+                    // Request permissions
+                    ActivityCompat.requestPermissions(AddTaskActivity.this, new String[]{Manifest.permission.READ_CALENDAR, Manifest.permission.WRITE_CALENDAR}, REQUEST_PERMISSIONS);
+                }
 
 
-                Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
-                startActivity(intent);
             }
 
           }
@@ -130,4 +145,33 @@ public class AddTaskActivity extends AppCompatActivity {
 
         this.finish();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                UUID uuid = UUID.randomUUID(); // Generate random unique id
+                String taskId = uuid.toString();
+
+                // Permissions granted, proceed with event creation
+                long startTime = calendar.getTimeInMillis();
+                long endTime = startTime + 3600000; // 1 hour
+               // long calId = CalendarHelper.getCalendarId(AddTaskActivity.this);
+                long calId = 2;
+                CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle), "", startTime, endTime, calId);
+
+                db = new Database(getApplicationContext());
+                db.todoInsert(taskId, String.valueOf(taskTitle), "0");
+
+                Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
+                startActivity(intent);
+            } else {
+                // Permissions denied, show an error message or disable the feature
+                Toast.makeText(AddTaskActivity.this, "Calendar permissions denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 }
