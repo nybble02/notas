@@ -4,35 +4,24 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Paint;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cw.notas.Checklist.Checkbox;
-import com.cw.notas.Checklist.ChecklistListActivity;
-import com.cw.notas.Checklist.ChecklistViewActivity;
-import com.cw.notas.Database;
-import com.cw.notas.Notes.NoteAddActivity;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class CheckboxAdapter extends BaseAdapter{
-    private Database db;
+    private DatabaseHelper db;
     private Context context;
     private ArrayList<Checkbox> checkboxes;
     private LayoutInflater inflater;
@@ -100,7 +89,7 @@ public class CheckboxAdapter extends BaseAdapter{
                         .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                db = new Database(context.getApplicationContext());
+                                db = new DatabaseHelper(context.getApplicationContext());
                                 db.checkboxDelete(currentCheckbox.getId());
                                 notifyDataSetChanged();
                                 Intent intent = new Intent("Check_Box_Delete");
@@ -123,7 +112,7 @@ public class CheckboxAdapter extends BaseAdapter{
                     currentCheckbox.setState("0");
                 }
 
-               db = new Database(context.getApplicationContext());
+               db = new DatabaseHelper(context.getApplicationContext());
                db.checkboxUpdate(String.valueOf(currentCheckbox.getId()), String.valueOf(currentCheckbox.getTitle()), String.valueOf(currentCheckbox.getState()));
             }
         });

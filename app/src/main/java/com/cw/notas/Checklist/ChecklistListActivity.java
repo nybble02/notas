@@ -3,7 +3,6 @@ package com.cw.notas.Checklist;
 import static android.app.PendingIntent.getActivity;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +14,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cw.notas.BaseActivity;
-import com.cw.notas.Database;
-import com.cw.notas.MainActivity;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
@@ -28,7 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ChecklistListActivity extends BaseActivity {
-    private Database db;
+    private DatabaseHelper db;
 
     static List<Checklist> checklistList = new ArrayList<Checklist>();
     List<String[]> checklistDB = null;
@@ -70,7 +67,7 @@ public class ChecklistListActivity extends BaseActivity {
                         if(listTitle.isEmpty()) {
                             Toast.makeText(ChecklistListActivity.this,  R.string.chkList_error, Toast.LENGTH_SHORT).show();
                         } else {
-                            db = new Database(getApplicationContext());
+                            db = new DatabaseHelper(getApplicationContext());
                             db.checklistInsert(listId, listTitle);
                             Toast.makeText(ChecklistListActivity.this, R.string.chkList_successCreated, Toast.LENGTH_SHORT).show();
                             dialogBoxOnClose();
@@ -103,7 +100,7 @@ public class ChecklistListActivity extends BaseActivity {
 
     private void populateChecklistList() {
 
-        db = new Database(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
         checklistDB = db.checklistSelectAll();
 
         for (String[] list : checklistDB) {

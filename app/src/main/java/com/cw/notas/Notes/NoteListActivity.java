@@ -8,14 +8,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.cw.notas.BaseActivity;
-import com.cw.notas.Database;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class NoteListActivity extends BaseActivity {
-    Database db;
+    DatabaseHelper db;
     static List<Note> noteList = new ArrayList<Note>();
     List<String[]> notesDB = null;
 
@@ -43,7 +43,7 @@ public class NoteListActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
 
-        db = new Database(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
         notesDB = db.noteSelectAll();
 
         for (String[] note : notesDB) {

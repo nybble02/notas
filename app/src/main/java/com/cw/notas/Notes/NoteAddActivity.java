@@ -12,10 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cw.notas.Database;
-import com.cw.notas.MainActivity;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
-import com.cw.notas.Todo.AddTaskActivity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +21,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class NoteAddActivity extends AppCompatActivity {
-    private Database db;
+    private DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +55,7 @@ public class NoteAddActivity extends AppCompatActivity {
                     DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                     String formattedTime = dateTime.format(formatDateTime);
 
-                    db = new Database(getApplicationContext());
+                    db = new DatabaseHelper(getApplicationContext());
                     db.noteUpdate(noteId,String.valueOf(noteTitle.getText()),String.valueOf(noteContent.getText()),formattedTime);
                     Toast.makeText(NoteAddActivity.this, R.string.notes_success, Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
@@ -75,7 +73,7 @@ public class NoteAddActivity extends AppCompatActivity {
                             .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    db = new Database(getApplicationContext());
+                                    db = new DatabaseHelper(getApplicationContext());
                                     db.noteDelete(noteId);
                                     Toast.makeText(NoteAddActivity.this, R.string.notes_successDelete, Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
@@ -106,7 +104,7 @@ public class NoteAddActivity extends AppCompatActivity {
                         UUID uuid = UUID.randomUUID(); // Generate random unique id
                         String noteId = uuid.toString();
 
-                        db = new Database(getApplicationContext());
+                        db = new DatabaseHelper(getApplicationContext());
                         db.noteInsert(noteId,String.valueOf(noteTitle.getText()),String.valueOf(noteContent.getText()),formattedTime);
 
                         Toast.makeText(NoteAddActivity.this, R.string.notes_successCreated, Toast.LENGTH_SHORT).show();

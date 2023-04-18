@@ -12,7 +12,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
 
-public class Database {
+/**
+ *  A helper class for modifying a SQLite database
+ */
+
+public class DatabaseHelper {
 
     private static final String DATABASE_NAME = "notas.db";
     private static int DATABASE_VERSION = 33;
@@ -30,18 +34,32 @@ public class Database {
     private static final String INSERT_TASK = "INSERT INTO todo (id, title, state) VALUES (?,?,?)";
     private final String SELECT_CHECKBOX = "SELECT checkbox.id, listId, checkbox.title, state FROM checkbox INNER JOIN checklist ON checkbox.listId = checklist.id WHERE checklist.id=?";
 
-    public Database(Context context) {
-        Database.context = context;
-        OpenHelper openHelper = new OpenHelper(this.context);
-        Database.db = openHelper.getWritableDatabase();
 
-        this.insertNote = Database.db.compileStatement(INSERT_NOTE);
-        this.insertChecklist = Database.db.compileStatement(INSERT_CHECKLIST);
-        this.insertCheckbox = Database.db.compileStatement(INSERT_CHECKBOX);
-        this.insertTask = Database.db.compileStatement(INSERT_TASK);
+    /**
+     * Constructs a new instance of the database
+     * @param context
+     */
+    public DatabaseHelper(Context context) {
+        DatabaseHelper.context = context;
+        OpenHelper openHelper = new OpenHelper(this.context);
+        DatabaseHelper.db = openHelper.getWritableDatabase();
+
+        this.insertNote = DatabaseHelper.db.compileStatement(INSERT_NOTE);
+        this.insertChecklist = DatabaseHelper.db.compileStatement(INSERT_CHECKLIST);
+        this.insertCheckbox = DatabaseHelper.db.compileStatement(INSERT_CHECKBOX);
+        this.insertTask = DatabaseHelper.db.compileStatement(INSERT_TASK);
     }
 
     // Notes
+
+    /**
+     * Insert a new note in the database
+     * @param id
+     * @param title
+     * @param content
+     * @param dateCreated
+     * @return the id of the row inserted
+     */
     public long noteInsert(String id, String title, String content, String dateCreated) {
         this.insertNote.bindString(1, id);
         this.insertNote.bindString(2, title);
@@ -49,6 +67,14 @@ public class Database {
         this.insertNote.bindString(4, dateCreated);
         return this.insertNote.executeInsert();
     }
+
+    /**
+     * Update a note in the database
+     * @param noteId
+     * @param title
+     * @param content
+     * @param dateCreated
+     */
     public void noteUpdate(String noteId, String title, String content, String dateCreated) {
         ContentValues noteValues = new ContentValues();
         noteValues.put("title", title);
@@ -59,10 +85,20 @@ public class Database {
         db.close();
 
    }
+
+    /**
+     * Deletes a note in the database
+     * @param noteId
+     */
     public void noteDelete(String noteId) {
         db.delete("notes", "id=?", new String[]{noteId});
         db.close();
     }
+
+    /**
+     * Selects all the notes in the database
+     * @return a list of notes
+     */
     public List<String[]> noteSelectAll() {
         List<String[]> noteList = new ArrayList<String[]>();
 
@@ -91,12 +127,24 @@ public class Database {
     }
 
 
-    // Checklist
+    // Checklis
+
+    /**
+     * Inserts a checklist into the database
+     * @param id
+     * @param title
+     * @return the id of the row inserted
+     */
     public long checklistInsert(String id, String title){
         this.insertChecklist.bindString(1, id);
         this.insertChecklist.bindString(2, title);
         return this.insertChecklist.executeInsert();
     }
+
+    /**
+     * Selects all the checklist in the database
+     * @return a list of checklists
+     */
     public List<String[]> checklistSelectAll() {
         List<String[]> checklistList = new ArrayList<String[]>();
 
@@ -121,13 +169,25 @@ public class Database {
         cursor.close();
         return checklistList;
     }
+
+    /**
+     * Deletes a checklist and all of its checkboxes
+     * @param listId
+     */
     public void checklistDelete(String listId) {
         db.delete("checkbox", "listId=?", new String[]{listId});
         db.delete("checklist", "id=?", new String[]{listId});
         db.close();
     }
 
-
+    /**
+     * Inserts a checkbox in a specific checklist
+     * @param id
+     * @param listId
+     * @param title
+     * @param state
+     * @return id of row inserted
+     */
     // Checkbox SQl
     public long checkboxInsert(String id, String listId, String title, String state) {
         this.insertCheckbox.bindString(1, id);
@@ -137,6 +197,11 @@ public class Database {
         return this.insertCheckbox.executeInsert();
     }
 
+    /**
+     * Selects all the checkboxes in a checklist
+     * @param listId
+     * @return list of checkboxes
+     */
     public List<String[]> checkboxSelect(String listId) {
         List<String[]> checkboxList = new ArrayList<String[]>();
 
@@ -170,6 +235,12 @@ public class Database {
 
     }
 
+    /**
+     * Updates a checkbox
+     * @param checkboxId
+     * @param title
+     * @param state
+     */
     public void checkboxUpdate(String checkboxId, String title, String state) {
         ContentValues checkboxValues = new ContentValues();
         checkboxValues.put("id", checkboxId);
@@ -180,6 +251,10 @@ public class Database {
         db.close();
     }
 
+    /**
+     * Deletes a checkbox
+     * @param id
+     */
     public void checkboxDelete(String id) {
         db.delete("checkbox", "id=?", new String[]{id});
         db.close();
@@ -187,6 +262,14 @@ public class Database {
 
 
     // Todos
+
+    /**
+     * Inserts a task into the database
+     * @param id
+     * @param title
+     * @param state
+     * @return an Id of the row that was inserted
+     */
     public long todoInsert(String id, String title, String state) {
         this.insertTask.bindString(1, id);
         this.insertTask.bindString(2, title);
@@ -194,6 +277,10 @@ public class Database {
         return this.insertTask.executeInsert();
     }
 
+    /**
+     * Selects all the todos task in the database
+     * @return a list of todo tasks
+     */
     public List<String[]> todoSelectAll() {
         List<String[]> taskList = new ArrayList<String[]>();
 
@@ -220,6 +307,12 @@ public class Database {
         return taskList;
     }
 
+    /**
+     * Updates a todo task
+     * @param taskId
+     * @param title
+     * @param state
+     */
     public void todoUpdate(String taskId, String title, String state) {
         ContentValues taskValues = new ContentValues();
         taskValues.put("id", taskId);
@@ -230,34 +323,57 @@ public class Database {
         db.close();
     }
 
+    /**
+     * Deletes a todo task
+     * @param taskId
+     */
     public void todoDelete(String taskId) {
         db.delete("todo", "id=?", new String[]{taskId});
         db.close();
     }
 
+    /**
+     * Deletes all the task on a specific column
+     * @param state
+     */
     public void todoDeleteBoard(String state) {
         db.delete("todo", "state=?", new String[]{state});
         db.close();
     }
 
+    /**
+     * Deletes all the tasks
+     */
     public void todoDeleteAll() {
         db.delete("todo", null, null);
         db.close();
     }
 
-
-
+    /**
+     * Helper class that creates the database and does version management
+     */
     public static class OpenHelper extends SQLiteOpenHelper {
         OpenHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
+        /**
+         * Creates a database with the specified tables
+         * @param db
+         */
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE notes (id TEXT PRIMARY KEY, title TEXT, content TEXT, dateCreated TEXT)");
             db.execSQL("CREATE TABLE checklist (id TEXT PRIMARY KEY, title TEXT)");
             db.execSQL("CREATE TABLE checkbox (id TEXT PRIMARY KEY, listId TEXT, title TEXT, state TEXT)");
             db.execSQL("CREATE TABLE todo (id TEXT PRIMARY KEY, title TEXT, state TEXT)");
         }
+
+        /**
+         * Deletes the tables if the version number changes
+         * @param db
+         * @param oldVersion
+         * @param newVersion
+         */
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             DATABASE_VERSION = newVersion;

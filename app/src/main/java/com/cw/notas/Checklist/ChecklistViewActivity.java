@@ -15,29 +15,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cw.notas.Database;
-import com.cw.notas.Notes.NoteAddActivity;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class ChecklistViewActivity extends AppCompatActivity {
-    private Database db;
+    private DatabaseHelper db;
     static ArrayList<Checkbox> checkboxList = new ArrayList<Checkbox>();
     List<String[]> checkboxDB = null;
 
@@ -138,7 +130,7 @@ public class ChecklistViewActivity extends AppCompatActivity {
                             Toast.makeText(ChecklistViewActivity.this,  R.string.chk_error, Toast.LENGTH_SHORT).show();
 
                         } else {
-                            db = new Database(getApplicationContext());
+                            db = new DatabaseHelper(getApplicationContext());
                             db.checkboxInsert(checkboxId, listId, checkboxTitle, "0");
                             Toast.makeText(ChecklistViewActivity.this, R.string.chk_successCreated, Toast.LENGTH_SHORT).show();
 
@@ -164,7 +156,7 @@ public class ChecklistViewActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db = new Database(getApplicationContext());
+                        db = new DatabaseHelper(getApplicationContext());
                         db.checklistDelete(listId);
                         Toast.makeText(ChecklistViewActivity.this, R.string.chkList_successDeleted, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), ChecklistListActivity.class);
@@ -187,7 +179,7 @@ public class ChecklistViewActivity extends AppCompatActivity {
         //ListView checkboxListView_checked = (ListView)findViewById(R.id.checkboxListView_checked);
 
 
-        db = new Database(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
         checkboxDB = db.checkboxSelect(listId);
 
         for (String[] checkbox : checkboxDB) {

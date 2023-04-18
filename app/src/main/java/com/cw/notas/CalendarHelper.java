@@ -11,8 +11,16 @@ import android.util.Log;
 
 import java.util.TimeZone;
 
+/**
+ * A helper class for setting events in the devices calendar
+ */
 public class CalendarHelper {
 
+    /**
+     * Gets the id of the calendar on the device
+     * @param context
+     * @return ID of the calendar
+     */
     public static Long getCalendarId(Context context) {
         String[] projection = new String[] {
                 CalendarContract.Calendars._ID,
@@ -44,9 +52,6 @@ public class CalendarHelper {
 
                 calName = calCursor.getString(nameCol);
                 calID = calCursor.getString(idCol);
-
-                Log.d("test","Calendar name = " + calName + " Calendar ID = " + calID);
-
                 calCursor.close();
                 return Long.parseLong(calID);
             }
@@ -56,7 +61,15 @@ public class CalendarHelper {
     }
 
 
-
+    /**
+     * Sets an event in the calendar on the device
+     * @param context
+     * @param title
+     * @param description
+     * @param startTime
+     * @param endTime
+     * @param calId
+     */
     public static void setEvent (Context context,String title, String description, long startTime, long endTime, long calId) {
 
         ContentValues values = new ContentValues();

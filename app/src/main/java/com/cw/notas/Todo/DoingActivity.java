@@ -2,13 +2,11 @@ package com.cw.notas.Todo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,21 +14,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.cw.notas.BaseActivity;
-import com.cw.notas.Database;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 
 public class DoingActivity extends BaseActivity {
-    private Database db;
+    private DatabaseHelper db;
     static ArrayList<Task> taskList = new ArrayList<Task>();
     List<String[]> taskDB = null;
     ArrayAdapter<Task> adapter;
@@ -136,7 +132,7 @@ public class DoingActivity extends BaseActivity {
     }
     private void populateTaskList(){
 
-        db = new Database(getApplicationContext());
+        db = new DatabaseHelper(getApplicationContext());
         taskDB = db.todoSelectAll();
 
         for (String [] task : taskDB) {
@@ -161,7 +157,7 @@ public class DoingActivity extends BaseActivity {
     }
 
     private void updateTaskState(Task task, String state) {
-        db = new Database(DoingActivity.this);
+        db = new DatabaseHelper(DoingActivity.this);
         db.todoUpdate(task.getId(),task.getTitle(), state);
 
         removeTaskList();
@@ -176,7 +172,7 @@ public class DoingActivity extends BaseActivity {
                 .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db = new Database(DoingActivity.this);
+                        db = new DatabaseHelper(DoingActivity.this);
                         db.todoDelete(taskId);
                         Toast.makeText(DoingActivity.this, R.string.todos_deleteAll_Success, Toast.LENGTH_SHORT).show();
                         removeTaskList();
@@ -194,7 +190,7 @@ public class DoingActivity extends BaseActivity {
                 .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db = new Database(DoingActivity.this);
+                        db = new DatabaseHelper(DoingActivity.this);
                         db.todoDeleteBoard(state);
                         removeTaskList();
                         adapter.notifyDataSetChanged();
@@ -213,7 +209,7 @@ public class DoingActivity extends BaseActivity {
                 .setPositiveButton(R.string.app_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db = new Database(DoingActivity.this);
+                        db = new DatabaseHelper(DoingActivity.this);
                         db.todoDeleteAll();
                         removeTaskList();
                         adapter.notifyDataSetChanged();

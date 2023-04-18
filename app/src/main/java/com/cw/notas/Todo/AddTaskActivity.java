@@ -11,7 +11,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -21,17 +20,16 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cw.notas.CalendarHelper;
-import com.cw.notas.Database;
+import com.cw.notas.DatabaseHelper;
 import com.cw.notas.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Objects;
 import java.util.UUID;
 
 public class AddTaskActivity extends AppCompatActivity {
 
-    private Database db;
+    private DatabaseHelper db;
     Calendar calendar;
     final int REQUEST_PERMISSIONS = 100;
     String taskTitle;
@@ -119,7 +117,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     long calId = CalendarHelper.getCalendarId(AddTaskActivity.this);
                     CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle), "", startTime, endTime, calId);
 
-                    db = new Database(getApplicationContext());
+                    db = new DatabaseHelper(getApplicationContext());
                     db.todoInsert(taskId, String.valueOf(taskTitle), "0");
 
                     Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
@@ -162,7 +160,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 long calId = 2;
                 CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle), "", startTime, endTime, calId);
 
-                db = new Database(getApplicationContext());
+                db = new DatabaseHelper(getApplicationContext());
                 db.todoInsert(taskId, String.valueOf(taskTitle), "0");
 
                 Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
