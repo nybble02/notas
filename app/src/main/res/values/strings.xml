@@ -23,20 +23,25 @@
     <string name="notes_emptyList">No notes created…</string>
     <string name="notes_hint_title">Title</string>
     <string name="notes_hint_content">Your note…</string>
+    <string name="notes_error">Please enter a note title</string>
 
     <!-- checklist values -->
     <string name="chkList_btn_addChk">Add Checklist</string>
     <string name="chkList_btn_editChk">Edit Checklist</string>
     <string name="chkList_input_listName">Enter your list name…</string>
     <string name="chkList_create_list">Create new List</string>
+    <string name="chkList_error">Please enter a checklist title</string>
 
     <string name="chkbox_add_title">Add Checkbox</string>
     <string name="chkbox_input_listName">Enter your task name…</string>
     <string name="chk_options_menu_delete">Delete List</string>
     <string name="chk_options_menu_addChkBox">Add Task</string>
     <string name="chk_options_menu_delChkBox">Delete Selected Tasks</string>
+    <string name="chk_error">Please enter a checkbox title </string>
 
     <!-- todos values -->
+
+    <string name="todos_error">Please enter a task title</string>
     <string name="todos_title_todo">To Do</string>
     <string name="todos_title_doing">Doing</string>
     <string name="todos_title_done">Done</string>
@@ -62,6 +67,7 @@
     <string name="todos_menu_alreadyDoing">Already on "Doing" Tab</string>
     <string name="todos_menu_alreadyDone">Already on "Done" Tab"</string>
     <string name="todos_menu_header">Select an Option</string>
+    <string name="todos_add_editTask">Edit task</string>
 
 
     <!-- language values -->

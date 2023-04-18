@@ -93,9 +93,6 @@ public class TodoActivity extends BaseActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
-            case R.id.edit:
-                //Toast.makeText(getActivity(), getResources().getString(R.string.app_edit), Toast.LENGTH_SHORT).show();
-                return true;
             case R.id.delete:
                 deleteTaskDialog(taskList.get(info.position).getId());
                 return true;
@@ -141,12 +138,6 @@ public class TodoActivity extends BaseActivity {
         return false;
     }
 
-
-    private void onDialogBoxClose(){
-        removeTaskList();
-        populateTaskList();
-    }
-
     private void populateTaskList(){
 
         db = new Database(getApplicationContext());
@@ -158,7 +149,6 @@ public class TodoActivity extends BaseActivity {
             taskObj.setId(task[0]);
             taskObj.setTitle(task[1]);
             taskObj.setState(task[2]);
-            taskObj.setDate(Long.parseLong(task[3]));
 
             if (Objects.equals(taskObj.getState(), "0")) {
                 taskList.add(taskObj);
@@ -171,12 +161,11 @@ public class TodoActivity extends BaseActivity {
     }
     private void removeTaskList() {
         taskList.removeAll(taskList);
-//        adapter.notifyDataSetChanged();
     }
 
     private void updateTaskState(Task task, String state) {
         db = new Database(TodoActivity.this);
-        //db.todoUpdate(task.getId(),task.getTitle(), state);
+        db.todoUpdate(task.getId(),task.getTitle(), state);
 
         removeTaskList();
         populateTaskList();
@@ -192,8 +181,9 @@ public class TodoActivity extends BaseActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         db = new Database(TodoActivity.this);
                         db.todoDelete(taskId);
-                        Toast.makeText(TodoActivity.this, R.string.todos_dialog_delete, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TodoActivity.this, R.string.todos_deleteAll_Success, Toast.LENGTH_SHORT).show();
                         removeTaskList();
+                        adapter.notifyDataSetChanged();
                         populateTaskList();
                     }
                 }).setNegativeButton(R.string.app_no, null).show();

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.cw.notas.Database;
 import com.cw.notas.MainActivity;
 import com.cw.notas.R;
+import com.cw.notas.Todo.AddTaskActivity;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -92,20 +93,28 @@ public class NoteAddActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    LocalDateTime dateTime = LocalDateTime.now();
-                    DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-                    String formattedTime = dateTime.format(formatDateTime);
+                    String noteTitleStr = noteTitle.getText().toString().trim();
 
-                    UUID uuid = UUID.randomUUID(); // Generate random unique id
-                    String noteId = uuid.toString();
+                    if(noteTitleStr.isEmpty()) {
+                        Toast.makeText(NoteAddActivity.this, "", Toast.LENGTH_SHORT).show();
 
-                    db = new Database(getApplicationContext());
-                    db.noteInsert(noteId,String.valueOf(noteTitle.getText()),String.valueOf(noteContent.getText()),formattedTime);
+                    } else {
+                        LocalDateTime dateTime = LocalDateTime.now();
+                        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                        String formattedTime = dateTime.format(formatDateTime);
 
-                    Toast.makeText(NoteAddActivity.this, "Note successfully created!", Toast.LENGTH_SHORT).show();
+                        UUID uuid = UUID.randomUUID(); // Generate random unique id
+                        String noteId = uuid.toString();
 
-                    Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
-                    startActivity(intent);
+                        db = new Database(getApplicationContext());
+                        db.noteInsert(noteId,String.valueOf(noteTitle.getText()),String.valueOf(noteContent.getText()),formattedTime);
+
+                        Toast.makeText(NoteAddActivity.this, "Note successfully created!", Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(getApplicationContext(), NoteListActivity.class);
+                        startActivity(intent);
+                    }
+
                 }
             });
         }

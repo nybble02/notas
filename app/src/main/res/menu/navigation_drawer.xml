@@ -7,13 +7,13 @@
         android:title="@string/app_home"
         android:icon="@drawable/ic_home"/>
     <item android:id="@+id/navNotes"
-        android:title="Notes"
+        android:title="@string/app_notes"
         android:icon="@drawable/ic_notes"/>
     <item android:id="@+id/navChecklist"
-        android:title="Checklists"
+        android:title="@string/app_checklist"
         android:icon="@drawable/ic_checklist"/>
     <item android:id="@+id/navTodos"
-        android:title="Todos"
+        android:title="@string/app_todo"
         android:icon="@drawable/ic_todo"/>
 
 </menu>

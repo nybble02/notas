@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+ <!--TODO  DO ALL STRINGS-->
+    <!-- app values -->
+    <string name="app_name">NOTAS</string>
+    <string name="app_welcome">Benvenuto in Notas</string>
+    <string name="app_welcome2">L\'unica app per prendere appunti di cui hai bisogno!</string>
+    <string name="app_notify">Ricevi notifiche</string>
+    <string name="app_notes">Note</string>
+    <string name="app_home">Home</string>
+    <string name="app_checklist">Checklist</string>
+    <string name="app_todo">Attività</string>
+    <string name="app_madeBy">Creato da: Nicole Jordaan</string>
+    <string name="app_save">Salva</string>
+    <string name="app_delete">Elimina</string>
+    <string name="app_edit">Modifica</string>
+    <string name="app_cancel">Annulla</string>
+    <string name="app_sure">Sei sicuro?</string>
+    <string name="app_yes">Sì</string>
+    <string name="app_no">No</string>
+    <!-- notes values -->
+    <string name="notes_btn_addNote">Aggiungi nuova nota</string>
+    <string name="notes_btn_editNote">Modifica nota</string>
+    <string name="notes_emptyList">Nessuna nota creata...</string>
+    <string name="notes_hint_title">Titolo</string>
+    <string name="notes_hint_content">La tua nota...</string>
+    <string name="notes_error">Inserisci un titolo per la nota</string>
+
+    <!-- checklist values -->
+    <string name="chkList_btn_addChk">Aggiungi checklist</string>
+    <string name="chkList_btn_editChk">Modifica checklist</string>
+    <string name="chkList_input_listName">Inserisci il nome della lista...</string>
+    <string name="chkList_create_list">Crea nuova lista</string>
+    <string name="chkList_error">Inserisci un titolo per la checklist</string>
+
+    <string name="chkbox_add_title">Aggiungi casella di controllo</string>
+    <string name="chkbox_input_listName">Inserisci il nome del compito...</string>
+    <string name="chk_options_menu_delete">Elimina lista</string>
+    <string name="chk_options_menu_addChkBox">Aggiungi attività</string>
+    <string name="chk_options_menu_delChkBox">Elimina attività selezionate</string>
+    <string name="chk_error">Inserisci un titolo per la casella di controllo</string>
+
+    <string name="todos_error">Inserisci un titolo per l\'attività</string>
+    <string name="todos_title_todo">Da fare</string>
+    <string name="todos_title_doing">In corso</string>
+    <string name="todos_title_done">Completate</string>
+    <string name="todos_title_dueDate">Imposta un evento nel tuo calendario: </string>
+    <string name="todos_btn_clear">Pulisci la bacheca</string>
+    <string name="todos_btn_DeleteAll">Elimina tutte le attività</string>
+    <string name="todos_add_task">Aggiungi attività</string>
+    <string name="todos_add_taskDate">Imposta una data di scadenza</string>
+    <string name="todos_add_taskTime">Imposta un promemoria</string>
+    <string name="todos_update_taskSuccess">Attività aggiornata con successo!</string>
+    <string name="todos_delete_taskSuccess">Attività eliminata con successo!</string>
+    <string name="todos_clear_boardSuccess">La bacheca è stata pulita con successo!</string>
+    <string name="todos_deleteAll_Success">Tutte le attività sono state eliminate con successo!</string>
+    <string name="todos_menu_edit">Modifica attività</string>
+    <string name="todos_menu_delete">Elimina attività</string>
+    <string name="todos_dialog_delete">Eliminare questa attività?</string>
+    <string name="todos_dialog_Clear">Pulire la bacheca?</string>
+    <string name="todos_dialog_deleteAll">Eliminare tutti gli elementi?</string>
+    <string name="todos_menu_moveTodo">Sposta in "Da fare"</string>
+    <string name="todos_menu_moveDoing">Sposta in "In corso"</string>
+    <string name="todos_menu_moveDone">Sposta in "Completate"</string>
+    <string name="todos_menu_alreadyTodo">Già nella scheda "Da fare"</string>
+    <string name="todos_menu_alreadyDoing">Già nella scheda "In corso"</string>
+    <string name="todos_menu_alreadyDone">Già nella scheda "Completate"</string>
+    <string name="todos_menu_header">Seleziona un\'opzione</string>
+    <string name="todos_add_editTask">Modifica attività</string>
+
+    <!-- valori della lingua -->
+    <string name="lang_menu_en">Inglese</string>
+    <string name="lang_menu_fr">Francese</string>
+    <string name="lang_menu_gr">Tedesco</string>
+    <string name="lang_menu_it">Italiano</string>
+    <string name="lang_menu_ru">Russo</string>
+    <string name="lang_menu_jp">Giapponese</string>
+    <string name="lang_menu_ch">Cinese</string>
+
+    <!-- Navigation Drawer -->
+    <string name="nav_open">Apri</string>
+    <string name="nav_close">Chiudi</string>
+</resources>

@@ -91,9 +91,6 @@ public class DoingActivity extends BaseActivity {
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
-            case R.id.edit:
-                //Toast.makeText(getActivity(), getResources().getString(R.string.app_edit), Toast.LENGTH_SHORT).show();
-                return true;
             case R.id.delete:
                 deleteTaskDialog(taskList.get(info.position).getId());
                 return true;
@@ -121,11 +118,12 @@ public class DoingActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-
+        Intent intent;
         switch (item.getItemId())
         {
             case R.id.option_add:
-                openDialog();
+                intent = new Intent(getApplicationContext(), AddTaskActivity.class);
+                startActivity(intent);
                 break;
             case R.id.option_delete_items:
                 deleteAll();
@@ -136,43 +134,6 @@ public class DoingActivity extends BaseActivity {
         }
         return false;
     }
-
-    private void openDialog() {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(DoingActivity.this);
-        LayoutInflater inflater = getLayoutInflater();
-
-        // Set view to show custom dialog
-        View dialogView = inflater.inflate(R.layout.dialog_add_task, null);
-        // Get title of list from custom dialog box
-        EditText etTaskTitle = dialogView.findViewById(R.id.taskTitle);
-
-
-        builder.setView(dialogView)
-                .setTitle(R.string.todos_add_task)
-                .setPositiveButton(R.string.app_save, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        UUID uuid = UUID.randomUUID(); // Generate random unique id
-
-                        String taskTitle = String.valueOf(etTaskTitle.getText());
-                        String taskId = uuid.toString();
-
-                        db = new Database(getApplicationContext());
-                     //   db.todoInsert(taskId, taskTitle,"0");
-
-                        onDialogBoxClose();
-                    }
-                }).setNegativeButton(R.string.app_cancel, null).show();
-
-    }
-
-    private void onDialogBoxClose(){
-        removeTaskList();
-        populateTaskList();
-    }
-
     private void populateTaskList(){
 
         db = new Database(getApplicationContext());
@@ -201,7 +162,7 @@ public class DoingActivity extends BaseActivity {
 
     private void updateTaskState(Task task, String state) {
         db = new Database(DoingActivity.this);
-      //  db.todoUpdate(task.getId(),task.getTitle(), state);
+        db.todoUpdate(task.getId(),task.getTitle(), state);
 
         removeTaskList();
         populateTaskList();
@@ -217,8 +178,9 @@ public class DoingActivity extends BaseActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         db = new Database(DoingActivity.this);
                         db.todoDelete(taskId);
-                        Toast.makeText(DoingActivity.this, R.string.todos_dialog_delete, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DoingActivity.this, R.string.todos_deleteAll_Success, Toast.LENGTH_SHORT).show();
                         removeTaskList();
+                        adapter.notifyDataSetChanged();
                         populateTaskList();
                     }
                 }).setNegativeButton(R.string.app_no, null).show();

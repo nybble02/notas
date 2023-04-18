@@ -17,13 +17,11 @@ import android.widget.Toast;
 
 import com.cw.notas.CalendarHelper;
 import com.cw.notas.Database;
-import com.cw.notas.MainActivity;
-import com.cw.notas.Notes.NoteListActivity;
 import com.cw.notas.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AddTaskActivity extends AppCompatActivity {
@@ -34,9 +32,9 @@ public class AddTaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_task);
+        setContentView(R.layout.activity_task_add);
 
-        EditText taskTitle = findViewById(R.id.etTaskTitle);
+        EditText etTaskTitle = findViewById(R.id.etTaskTitle);
         Button btnDate = findViewById(R.id.btnDate);
         Button btnTime = findViewById(R.id.btnTime);
         Button btnSave = findViewById(R.id.btnSave);
@@ -47,11 +45,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String taskId = intent.getStringExtra("taskId");
-
-        if (taskId != null) {
-            pgTitle.setText(getResources().getString(R.string.todos_menu_edit));
-        }
-
 
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,25 +95,26 @@ public class AddTaskActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
 
-            if(taskTitle.getText() != null) {
+              String taskTitle = etTaskTitle.getText().toString().trim();
+
+            if (taskTitle.isEmpty()) {
+                Toast.makeText(AddTaskActivity.this, "Enter a title, due date and reminder time", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 UUID uuid = UUID.randomUUID(); // Generate random unique id
                 String taskId = uuid.toString();
 
                 long startTime = calendar.getTimeInMillis();
-                Log.d("TAG", "Milliseconds: " + startTime);
                 long endTime = startTime + 3600000; // 1 hour
                 long calId =  CalendarHelper.getCalendarId(AddTaskActivity.this);
-                CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle.getText()),"", startTime, endTime, calId);
+                CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle),"", startTime, endTime, calId);
 
                 db = new Database(getApplicationContext());
-                db.todoInsert(taskId, String.valueOf(taskTitle.getText()),"0", startTime);
+                db.todoInsert(taskId, String.valueOf(taskTitle),"0");
 
 
                 Intent intent = new Intent(getApplicationContext(), TodoActivity.class);
                 startActivity(intent);
-            }
-            else {
-                Toast.makeText(AddTaskActivity.this, "Enter a title, due date and reminder time", Toast.LENGTH_SHORT);
             }
 
           }
