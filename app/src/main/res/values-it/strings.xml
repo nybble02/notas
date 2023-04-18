@@ -70,4 +70,13 @@
     <string name="todos_menu_header">Seleziona un\'opzione</string>
     <string name="todos_add_editTask">Modifica compito</string>
     <string name="todos_add_dueDateError">Inserisci un titolo, una data di scadenza e un\'ora di promemoria</string>
+    <string name="lang_menu_en">Inglese</string>
+    <string name="lang_menu_fr">Francese</string>
+    <string name="lang_menu_gr">Tedesco</string>
+    <string name="lang_menu_it">Italiano</string>
+    <string name="lang_menu_ru">Russo</string>
+    <string name="lang_menu_jp">Giapponese</string>
+    <string name="lang_menu_ch">Cinese</string>
+    <string name="nav_open">Apri</string>
+    <string name="nav_close">Chiudi</string>
 </resources>
