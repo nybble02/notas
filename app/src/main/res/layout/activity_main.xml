@@ -30,7 +30,6 @@
             android:textAlignment="center"
             android:textSize="20dp" />
 
-
     </FrameLayout>
 
     <com.google.android.material.navigation.NavigationView
