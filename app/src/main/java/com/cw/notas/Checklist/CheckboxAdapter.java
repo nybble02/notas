@@ -31,7 +31,6 @@ public class CheckboxAdapter extends BaseAdapter{
 
 
     public CheckboxAdapter(Context context, ArrayList<Checkbox> checkboxes) {
-      //  super(context, resource, checkboxes);
         this.context = context;
         this.checkboxes = checkboxes;
         this.inflater = LayoutInflater.from(context);
@@ -53,8 +52,6 @@ public class CheckboxAdapter extends BaseAdapter{
     }
 
 
-
-
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         LinearLayout linearLayout = (LinearLayout) view;
@@ -68,8 +65,6 @@ public class CheckboxAdapter extends BaseAdapter{
         checkboxTitle.setText(currentCheckbox.getTitle());
 
         checkboxDelete = (ImageButton) view.findViewById(R.id.btnDeleteCheckbox);
-        //checkboxTitle.setText(currentCheckbox.getDueDate());
-
 
         cBox =  view.findViewById(R.id.checkboxBox);
 
@@ -79,6 +74,7 @@ public class CheckboxAdapter extends BaseAdapter{
             cBox.setChecked(false);
         }
 
+        // Open dialog to delete checkbox
         checkboxDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +88,8 @@ public class CheckboxAdapter extends BaseAdapter{
                                 db = new DatabaseHelper(context.getApplicationContext());
                                 db.checkboxDelete(currentCheckbox.getId());
                                 notifyDataSetChanged();
+
+                                // Broadcast status of of checkbox of checkbox
                                 Intent intent = new Intent("Check_Box_Delete");
                                 context.sendBroadcast(intent);
 
@@ -102,6 +100,7 @@ public class CheckboxAdapter extends BaseAdapter{
             }
         });
 
+        // Updates state of checkbox
         cBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {

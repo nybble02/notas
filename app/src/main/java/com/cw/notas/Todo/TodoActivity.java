@@ -45,6 +45,7 @@ public class TodoActivity extends BaseActivity {
         todoListView = (ListView)findViewById(R.id.taskList);
         registerForContextMenu(todoListView);
 
+        // Change to doing page
         Button btnDoing = findViewById(R.id.btnMoveDoing);
         btnDoing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +55,8 @@ public class TodoActivity extends BaseActivity {
             }
         });
 
+
+        // Change to done page
         Button btnDone = findViewById(R.id.btnMoveDone);
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +88,7 @@ public class TodoActivity extends BaseActivity {
 
     }
 
+    // Opens when an item is long clicked
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
@@ -185,6 +189,7 @@ public class TodoActivity extends BaseActivity {
                 }).setNegativeButton(R.string.app_no, null).show();
     }
 
+    // Delete tasks on activity
     private void clearBoard(String state) {
         new AlertDialog.Builder(TodoActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -204,6 +209,7 @@ public class TodoActivity extends BaseActivity {
                 }).setNegativeButton(R.string.app_no, null).show();
     }
 
+    //Deletes ALL Tasks
     private void deleteAll() {
         new AlertDialog.Builder(TodoActivity.this)
                 .setIcon(android.R.drawable.ic_dialog_alert)

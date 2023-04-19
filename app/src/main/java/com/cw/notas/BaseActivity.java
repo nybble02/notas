@@ -25,6 +25,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void onCreateDrawer() {
 
+        // Create nav drawer
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navDrawer = findViewById(R.id.navDrawer);
 
@@ -71,6 +72,7 @@ public class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Close the drawer when the back button is pressed
     @Override
     public void onBackPressed() {
         super.onBackPressed();

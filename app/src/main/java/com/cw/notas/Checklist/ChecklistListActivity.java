@@ -29,7 +29,6 @@ public class ChecklistListActivity extends BaseActivity {
 
     static List<Checklist> checklistList = new ArrayList<Checklist>();
     List<String[]> checklistDB = null;
-
     ArrayAdapter<Checklist> adapter;
 
     @Override
@@ -42,6 +41,7 @@ public class ChecklistListActivity extends BaseActivity {
         Button btnAddNewList = findViewById(R.id.btnAddNewChecklist);
 
 
+        // Open dialog to create new checklist
         btnAddNewList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +98,7 @@ public class ChecklistListActivity extends BaseActivity {
         populateChecklistList();
     }
 
+    // Gets all checklists
     private void populateChecklistList() {
 
         db = new DatabaseHelper(getApplicationContext());

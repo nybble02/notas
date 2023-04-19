@@ -176,7 +176,6 @@ public class ChecklistViewActivity extends AppCompatActivity {
 
 
         ListView checkboxListView = (ListView)findViewById(R.id.checkboxListView);
-        //ListView checkboxListView_checked = (ListView)findViewById(R.id.checkboxListView_checked);
 
 
         db = new DatabaseHelper(getApplicationContext());
