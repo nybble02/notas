@@ -53,8 +53,8 @@
     <string name="todos_title_doing">Doing</string>
     <string name="todos_title_done">Done</string>
     <string name="todos_title_dueDate">Set a event in your calendar: </string>
-    <string name="todos_btn_clear">Clear Board</string>
-    <string name="todos_btn_DeleteAll">Delete All Tasks</string>
+    <string name="todos_btn_clear">Delete Tasks on this column</string>
+    <string name="todos_btn_DeleteAll">Delete all Tasks</string>
     <string name="todos_add_task">Add Task</string>
     <string name="todos_add_taskDate">Set a due date </string>
     <string name="todos_add_taskTime">Set a reminder time </string>
@@ -66,7 +66,7 @@
     <string name="todos_menu_add">Add Task</string>
     <string name="todos_menu_delete">Delete Task</string>
     <string name="todos_dialog_delete">Delete this Task?</string>
-    <string name="todos_dialog_Clear">Clear the board?</string>
+    <string name="todos_dialog_Clear">Delete Tasks on this column?</string>
     <string name="todos_dialog_deleteAll">Delete all Items?</string>
     <string name="todos_menu_moveTodo">Move to "To Do"</string>
     <string name="todos_menu_moveDoing">Move to "Doing"</string>

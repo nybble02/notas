@@ -38,6 +38,7 @@ public class AddTaskActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_add);
+        calendar = Calendar.getInstance();
 
         EditText etTaskTitle = findViewById(R.id.etTaskTitle);
         Button btnDate = findViewById(R.id.btnDate);
@@ -54,7 +55,7 @@ public class AddTaskActivity extends AppCompatActivity {
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar = Calendar.getInstance();
+               // calendar = Calendar.getInstance();
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddTaskActivity.this);
                 datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -69,11 +70,10 @@ public class AddTaskActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
       btnTime.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-              calendar = Calendar.getInstance();
-
               TimePickerDialog timePickerDialog = new TimePickerDialog(
                       AddTaskActivity.this,
                       new TimePickerDialog.OnTimeSetListener() {
@@ -156,8 +156,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 // Permissions granted, proceed with event creation
                 long startTime = calendar.getTimeInMillis();
                 long endTime = startTime + 3600000; // 1 hour
-               // long calId = CalendarHelper.getCalendarId(AddTaskActivity.this);
-                long calId = 2;
+                long calId = CalendarHelper.getCalendarId(AddTaskActivity.this);
                 CalendarHelper.setEvent(AddTaskActivity.this, String.valueOf(taskTitle), "", startTime, endTime, calId);
 
                 db = new DatabaseHelper(getApplicationContext());

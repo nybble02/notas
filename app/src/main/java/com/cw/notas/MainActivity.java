@@ -48,50 +48,13 @@ import android.Manifest;
 
 public class MainActivity extends BaseActivity {
 
-    public DrawerLayout drawerLayout;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
-    public NavigationView navDrawer;
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.language_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        super.onOptionsItemSelected(item);
-
-        String langCode = "en";
-        switch (item.getItemId()) {
-            case R.id.lang_en:
-                langCode = "en";
-                break;
-            case R.id.lang_fr:
-                langCode = "fr";
-                break;
-            case R.id.lang_it:
-                langCode = "it";
-                break;
-            case R.id.lang_ru:
-                langCode = "ru";
-                break;
-            case R.id.lang_jp:
-                langCode = "jp";
-                break;
-        }
-        return false;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         onCreateDrawer();
-
-
-
     }
+
 }
 
 

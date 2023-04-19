@@ -21,6 +21,11 @@ public class CalendarHelper {
      * @param context
      * @return ID of the calendar
      */
+    /*
+    * This Method is from this forum :
+    * https://stackoverflow.com/questions/16242472/retrieve-the-default-calendar-id-in-android
+    * By Malwinder Singh
+    * */
     public static Long getCalendarId(Context context) {
         String[] projection = new String[] {
                 CalendarContract.Calendars._ID,
